@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<!--
+	Copyright (c) 2020, 2022 ArSysOp and others
+
+	This program and the accompanying materials are made available under the
+	terms of the Eclipse Public License 2.0 which is available at
+	https://www.eclipse.org/legal/epl-2.0/.
+
+	SPDX-License-Identifier: EPL-2.0
+
+	Contributors:
+		Alexander Fedorov (ArSysOp) - initial API and implementation
+-->
+<product name="CORE-V-SDK" uid="org.openhwgroup.corev.ide.product" id="org.openhwgroup.corev.ide.product" application="org.eclipse.ui.ide.workbench" version="0.0.0.1" useFeatures="true" includeLaunchers="true">
+
+   <configIni use="default">
+   </configIni>
+
+   <launcherArgs>
+      <programArgs>-clearPersistedState
+      </programArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+      </vmArgsMac>
+   </launcherArgs>
+
+   <windowImages i16="/org.openhwgroup.corev.ide/images/ohw16.png" i32="/org.openhwgroup.corev.ide/images/ohw32.png" i48="/org.openhwgroup.corev.ide/images/ohw48.png" i64="/org.openhwgroup.corev.ide/images/ohw64.png" i128="/org.openhwgroup.corev.ide/images/ohw128.png"/>
+
+   <splash
+      location="org.openhwgroup.corev.ide" />
+   <launcher name="CORE-V-SDK">
+      <win useIco="false">
+         <ico path="icons/OpenHW_Icon.ico"/>
+         <bmp
+            winSmallHigh="icons/coreicon16x16_32bit.bmp"
+            winSmallLow="icons/coreicon16x16_8bit.bmp"
+            winMediumHigh="icons/coreicon32x32_32bit.bmp"
+            winMediumLow="icons/coreicon32x32_8bit.bmp"
+            winLargeHigh="icons/coreicon48x48_32bit.bmp"
+            winLargeLow="icons/coreicon48x48_8bit.bmp"
+            winExtraLargeHigh="icons/coreicon256x256_32bit.bmp"/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="org.eclipse.platform"/>
+      <feature id="org.eclipse.cdt"/>
+      <feature id="org.eclipse.embedcdt.codered"/>
+      <feature id="org.eclipse.embedcdt.debug.gdbjtag.openocd"/>
+      <feature id="org.eclipse.embedcdt.doc.user"/>
+      <feature id="org.eclipse.embedcdt.managedbuild.cross.arm"/>
+      <feature id="org.eclipse.embedcdt.managedbuild.cross.riscv"/>
+      <feature id="org.eclipse.embedcdt.templates.cortexm"/>
+      <feature id="org.eclipse.embedcdt.templates.sifive"/>
+      <feature id="org.eclipse.embedcdt.packs"/>
+      <feature id="org.eclipse.passage.lic.execute.feature"/>
+      <feature id="org.openhwgroup.corev.ide.cdt.feature"/>
+      <feature id="org.openhwgroup.corev.ide.feature"/>
+      <feature id="org.openhwgroup.corev.ide.toolchains.gnu.feature"/>
+      <feature id="org.eclipse.tm.terminal.view.feature" installMode="root"/>
+      <feature id="org.eclipse.tm.terminal.connector.local.feature" installMode="root"/>
+      <feature id="org.eclipse.tm.terminal.control.feature" installMode="root"/>
+      <feature id="org.eclipse.tm.terminal.connector.cdtserial.feature" installMode="root"/>
+      <feature id="org.eclipse.tm.terminal.connector.ssh.feature" installMode="root"/>
+      <feature id="org.eclipse.tm.terminal.connector.telnet.feature" installMode="root"/>
+      <feature id="org.eclipse.tm.terminal.feature" installMode="root"/>
+      <feature id="org.eclipse.egit" installMode="root"/>
+   </features>
+
+   <configurations>
+      <plugin id="org.apache.felix.scr" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="4" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+      <plugin id="org.eclipse.osgi" autoStart="true" startLevel="-1" />
+   </configurations>
+
+</product>

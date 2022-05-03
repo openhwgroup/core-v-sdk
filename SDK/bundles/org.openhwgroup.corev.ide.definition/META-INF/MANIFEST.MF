@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.openhwgroup.corev.ide.definition
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.openhwgroup.corev.ide.definition;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Name: %Bundle-Name
+Bundle-Vendor: %Bundle-Vendor
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: com.google.gson;bundle-version="0.0.0",
+ org.eclipse.core.resources;bundle-version="0.0.0",
+ org.eclipse.core.runtime;bundle-version="0.0.0"
+Export-Package: org.openhwgroup.corev.ide.definition.api,
+ org.openhwgroup.corev.ide.definition.json,
+ org.openhwgroup.corev.ide.definition.project,
+ org.openhwgroup.corev.ide.definition.storage

@@ -1,0 +1,48 @@
+###############################################################################
+# Copyright (c) 2020 ArSysOp and others
+#
+# This program and the accompanying materials are made available under the
+# terms of the Eclipse Public License 2.0 which is available at
+# https://www.eclipse.org/legal/epl-2.0/.
+#
+# SPDX-License-Identifier: EPL-2.0
+#
+# Contributors:
+#     Alexander Fedorov (ArSysOp) - initial API and implementation
+###############################################################################
+
+#Maven
+target/
+
+# Compiled class file
+*.class
+
+# JDT output
+/*/*/bin/
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+#m2e
+/.settings/
+releng/**/.settings/
+
+#tycho
+.polyglot.build.properties
+.META-INF_MANIFEST.MF
+.polyglot..META-INF_MANIFEST.MF
+*.takari_issue_192
