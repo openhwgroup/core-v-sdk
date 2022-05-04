@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Copyright (c) 2020, 2022 ArSysOp and others
+
+	This program and the accompanying materials are made available under the
+	terms of the Eclipse Public License 2.0 which is available at
+	https://www.eclipse.org/legal/epl-2.0/.
+
+	SPDX-License-Identifier: EPL-2.0
+
+	Contributors:
+		Alexander Fedorov (ArSysOp) - initial API and implementation
+-->
+<site>
+	<category-def
+		name="org.openhwgroup.corev.ide.category"
+		label="OpenHW Group CORE-V IDE">
+		<description>
+			OpenHW Group CORE-V IDE based on Eclipse CDT
+		</description>
+	</category-def>
+	<feature
+		id="org.openhwgroup.corev.ide.cdt.feature">
+		<category name="org.openhwgroup.corev.ide.category" />
+	</feature>
+	<feature
+		id="org.openhwgroup.corev.ide.feature">
+		<category name="org.openhwgroup.corev.ide.category" />
+	</feature>
+	<feature
+		id="org.openhwgroup.corev.ide.toolchains.gnu.feature">
+		<category name="org.openhwgroup.corev.ide.category" />
+	</feature>
+	<category-def
+		name="org.openhwgroup.corev.ide.category.source"
+		label="OpenHW Group CORE-V IDE Developer Resources">
+		<description>
+			OpenHW Group CORE-V IDE based on Eclipse CDT Developer Resources
+		</description>
+	</category-def>
+	<feature
+		id="org.openhwgroup.corev.ide.cdt.feature.source">
+		<category name="org.openhwgroup.corev.ide.category.source" />
+	</feature>
+	<feature
+		id="org.openhwgroup.corev.ide.feature.source">
+		<category name="org.openhwgroup.corev.ide.category.source" />
+	</feature>
+	<feature
+		id="org.openhwgroup.corev.ide.toolchains.gnu.feature.source">
+		<category name="org.openhwgroup.corev.ide.category.source" />
+	</feature>
+</site>

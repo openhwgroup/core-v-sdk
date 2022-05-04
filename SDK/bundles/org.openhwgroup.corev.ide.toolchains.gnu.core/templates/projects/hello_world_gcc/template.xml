@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+	Copyright (c) 2020, 2021 ArSysOp and others
+
+	This program and the accompanying materials are made available under the
+	terms of the Eclipse Public License 2.0 which is available at
+	https://www.eclipse.org/legal/epl-2.0/.
+
+	SPDX-License-Identifier: EPL-2.0
+
+	Contributors:
+		Alexander Fedorov (ArSysOp) - initial API and implementation
+		Nikifor Fedorov (ArSysOp) - initial API and implementation
+-->
+<template
+	type="ProjTempl"
+	version="1.0"
+	supplier="Eclipse.org"
+	revision="0.1"
+	author="Alexander Fedorov (ArSysOp)"
+	copyright="Copyright (c) 2020, 2021 ArSysOp and others. This program and the accompanying materials are made available under the terms of the Eclipse Public License 2.0 which accompanies this distribution, and is available at https://www.eclipse.org/legal/epl-2.0/
+	
+ SPDX-License-Identifier: EPL-2.0"
+	id="hello_corev_gcc_project"
+	label="%hello_corev_c_project_label"
+	description="%hello_corev_c_project_description"
+	help="help.html">
+
+	<property-group
+		id="basics"
+		label="%hello_corev_c_basics_label"
+		description="%hello_corev_c_basics_description"
+		type="PAGES-ONLY"
+		help="help.html">
+		<property
+			id="author"
+			label="%hello_corev_c_author_label"
+			description="%hello_corev_c_author_description"
+			type="input"
+			pattern=".*"
+			default=""
+			hidden="false"
+			persist="true" />
+		<property
+			id="copyright"
+			label="%hello_corev_c_copyright_label"
+			description="%hello_corev_c_copyright_description"
+			type="input"
+			pattern=".*"
+			default="%hello_corev_c_copyright_default"
+			hidden="false"
+			persist="true" />
+		<property
+			id="version"
+			label="%hello_corev_c_version_label"
+			description="%hello_corev_c_version_description"
+			type="input"
+			pattern=".*"
+			default="%hello_corev_c_version_default"
+			hidden="false"
+			persist="true" />
+	</property-group>
+
+	<process type="org.eclipse.cdt.managedbuilder.core.NewManagedProject">
+		<simple
+			name="name"
+			value="$(projectName)" />
+		<simple
+			name="artifactExtension"
+			value="elf" />
+		<simple
+			name="isCProject"
+			value="true" />
+	</process>
+	<process type="org.eclipse.cdt.core.CreateSourceFolder">
+		<simple 
+			name="projectName" 
+			value="$(projectName)">
+		</simple>
+		<simple 
+			name="path" 
+			value="src">
+		</simple>
+	</process>
+	<process type="org.eclipse.cdt.core.AddFiles">
+		<simple name="projectName" value="$(projectName)"></simple>
+		<complex-array name="files">
+			<element>
+				<simple
+					name="source"
+					value="src/main.c" />
+				<simple
+					name="target"
+					value="src/main.c" />
+				<simple
+					name="replaceable"
+					value="true" />
+			</element>
+			<element>
+				<simple
+					name="source"
+					value="src/buildfile" />
+				<simple
+					name="target"
+					value="src/../makefile" />
+				<simple
+					name="replaceable"
+					value="true" />
+			</element>
+		</complex-array>
+	</process>
+	<process type="org.eclipse.cdt.ui.OpenFiles">
+		<simple
+			name="projectName"
+			value="$(projectName)" />
+		<complex-array name="files">
+			<element>
+				<simple
+					name="target"
+					value="src/main.c" />
+			</element>
+		</complex-array>
+	</process>
+
+</template>
+

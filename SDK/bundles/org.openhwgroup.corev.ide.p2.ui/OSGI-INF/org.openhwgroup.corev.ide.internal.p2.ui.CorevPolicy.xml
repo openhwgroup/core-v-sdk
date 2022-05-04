@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.openhwgroup.corev.ide.internal.p2.ui.CorevPolicy">
+   <property name="service.ranking" type="Integer" value="1"/>
+   <service>
+      <provide interface="org.eclipse.equinox.p2.ui.Policy"/>
+   </service>
+   <implementation class="org.openhwgroup.corev.ide.internal.p2.ui.CorevPolicy"/>
+</scr:component>

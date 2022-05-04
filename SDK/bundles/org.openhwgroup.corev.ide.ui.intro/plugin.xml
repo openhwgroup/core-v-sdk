@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<!--
+	Copyright (c) 2021 ArSysOp and others
+
+	This program and the accompanying materials are made available under the
+	terms of the Eclipse Public License 2.0 which is available at
+	https://www.eclipse.org/legal/epl-2.0/.
+
+	SPDX-License-Identifier: EPL-2.0
+
+	Contributors:
+		Nikifor Fedorov (ArSysOp) - initial API and implementation
+-->
+<plugin>
+	<extension point="org.eclipse.ui.intro">
+		<intro
+			id="org.openhwgroup.corev.ide.intro"
+			class="org.eclipse.ui.intro.config.CustomizableIntroPart">
+		</intro>
+		<introProductBinding
+		 	introId="org.openhwgroup.corev.ide.intro"
+		 	productId="org.openhwgroup.corev.ide.product">
+		</introProductBinding>
+	</extension>
+	<extension
+         point="org.eclipse.ui.intro.config">
+      <config
+            id="org.openhwgroup.corev.ide.configId"
+            introId="org.openhwgroup.corev.ide.intro"
+            content="introContent.xml">
+         <presentation
+               home-page-id="root">
+            <implementation
+                  os="win32,linux,macosx"
+                  kind="html">
+            </implementation>
+         </presentation>
+      </config>
+   </extension>
+
+</plugin>

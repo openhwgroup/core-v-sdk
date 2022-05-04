@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Copyright (c) 2020, 2022 ArSysOp and others
+
+	This program and the accompanying materials are made available under the
+	terms of the Eclipse Public License 2.0 which is available at
+	https://www.eclipse.org/legal/epl-2.0/.
+
+	SPDX-License-Identifier: EPL-2.0
+
+	Contributors:
+		Alexander Fedorov (ArSysOp) - initial API and implementation
+-->
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.openhwgroup.corev.ide</groupId>
+	<artifactId>org.openhwgroup.corev.ide.aggregator</artifactId>
+	<version>0.2.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>..\..\releng\org.openhwgroup.corev.ide.target</module>
+
+		<module>..\..\bundles\org.openhwgroup.corev.ide.toolchains.gnu</module>
+		<module>..\..\bundles\org.openhwgroup.corev.ide.toolchains.gnu.core</module>
+		<module>..\..\bundles\org.openhwgroup.corev.ide.toolchains.gnu.ui</module>
+		<module>..\..\features\org.openhwgroup.corev.ide.toolchains.gnu.feature</module>
+		<module>..\..\bundles\org.openhwgroup.corev.ide.debug.ui</module>
+		<module>..\..\bundles\org.eclipse.embedcdt.debug.gdbjtag.qemu.core</module>
+		<module>..\..\bundles\org.eclipse.embedcdt.debug.gdbjtag.qemu.ui</module>
+		<module>..\..\features\org.openhwgroup.corev.ide.cdt.feature</module>
+
+		<module>..\..\bundles\org.openhwgroup.corev.ide.doc.user</module>
+
+		<module>..\..\bundles\org.openhwgroup.corev.ide</module>
+		<module>..\..\bundles\org.openhwgroup.corev.ide.ui.workbench</module>
+		<module>..\..\bundles\org.openhwgroup.corev.ide.definition</module>
+		<module>..\..\bundles\org.openhwgroup.corev.ide.definition.ui</module>
+		<module>..\..\bundles\org.openhwgroup.corev.ide.p2.ui</module>
+		<module>..\..\bundles\org.openhwgroup.corev.ide.seal</module>
+		<module>..\..\features\org.openhwgroup.corev.ide.feature</module>
+
+		<module>..\..\releng\org.openhwgroup.corev.ide.repository</module>
+
+		<module>..\..\products\org.openhwgroup.corev.ide.product</module>
+	</modules>
+
+</project>

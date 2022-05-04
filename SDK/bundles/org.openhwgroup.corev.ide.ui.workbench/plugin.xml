@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<!--
+	Copyright (c) 2021 ArSysOp and others
+
+	This program and the accompanying materials are made available under the
+	terms of the Eclipse Public License 2.0 which is available at
+	https://www.eclipse.org/legal/epl-2.0/.
+
+	SPDX-License-Identifier: EPL-2.0
+
+	Contributors:
+		Nikifor Fedorov (ArSysOp) - initial API and implementation
+-->
+<plugin>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.openhwgroup.corev.ide.ui.workbench.CoreVPerspective"
+            icon="platform:/plugin/org.openhwgroup.corev.ide/images/ohw16.png"
+            id="org.openhwgroup.corev.ide.ui.workbench.perspective"
+            name="%Perspective-Name">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="false"
+            category="org.openhwgroup.corev.ide.ui.workbench.category"
+            class="org.eclipse.ui.navigator.CommonNavigator"
+            icon="platform:/plugin/org.openhwgroup.corev.ide/images/ohw16.png"
+            id="org.openhwgroup.corev.ide.ui.workbench.explorer"
+            name="%ProjectsView-Name"
+            restorable="true">
+      </view>
+      <category
+            id="org.openhwgroup.corev.ide.ui.workbench.category"
+            name="%Category-Name">
+      </category>
+   </extension>
+   <extension
+         point="org.eclipse.ui.navigator.viewer">
+      <viewer
+            viewerId="org.openhwgroup.corev.ide.ui.workbench.explorer">
+      </viewer>
+      <viewerContentBinding
+            viewerId="org.openhwgroup.corev.ide.ui.workbench.explorer">
+         <includes>
+            <contentExtension
+                  pattern="org.eclipse.ui.navigator.resourceContent">
+            </contentExtension>
+            <contentExtension
+                  pattern="org.eclipse.ui.navigator.resources.filters.*">
+            </contentExtension>
+            <contentExtension
+                  pattern="org.openhwgroup.corev.ide.ui.workbench.projectStructure">
+            </contentExtension>
+         </includes>
+      </viewerContentBinding>
+      <viewerActionBinding
+            viewerId="org.openhwgroup.corev.ide.ui.workbench.explorer">
+         <includes>
+            <actionExtension
+                  pattern="org.eclipse.ui.navigator.resources.*">
+            </actionExtension>
+         </includes>
+      </viewerActionBinding>
+   </extension>
+   <extension
+         point="org.eclipse.ui.navigator.navigatorContent">
+      <navigatorContent
+            activeByDefault="true"
+            contentProvider="org.openhwgroup.corev.ide.ui.workbench.ContentProvider"
+            id="org.openhwgroup.corev.ide.ui.workbench.projectStructure"
+            labelProvider="org.openhwgroup.corev.ide.ui.workbench.LabelProvider"
+            name="%Content-Name"
+            priority="normal">
+         <triggerPoints>
+            <or>
+               <instanceof
+                     value="org.eclipse.core.resources.IProject">
+               </instanceof>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+               <instanceof
+                     value="org.openhwgroup.corev.ide.ui.workbench.meta.PropertyNode">
+               </instanceof>
+            </or>
+         </possibleChildren>
+      </navigatorContent>
+   </extension>
+</plugin>

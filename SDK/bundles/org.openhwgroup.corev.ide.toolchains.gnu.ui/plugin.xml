@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<!--
+	Copyright (c) 2020 ArSysOp and others
+
+	This program and the accompanying materials are made available under the
+	terms of the Eclipse Public License 2.0 which is available at
+	https://www.eclipse.org/legal/epl-2.0/.
+
+	SPDX-License-Identifier: EPL-2.0
+
+	Contributors:
+		Alexander Fedorov (ArSysOp) - initial API and implementation
+-->
+<plugin>
+   <extension
+         point="org.eclipse.cdt.managedbuilder.ui.newWizardPages">
+      <wizardPage
+            ID="org.openhwgroup.corev.ide.mbs.gnu.ui.wizard.page.setup"
+            operationClass="org.openhwgroup.corev.ide.internal.toolchain.gnu.ui.wizards.GnuToolchainOperation"
+            pageClass="org.openhwgroup.corev.ide.internal.toolchain.gnu.ui.wizards.GnuToolchainWizardPage">
+         <toolchain
+               toolchainID="org.openhwgroup.corev.ide.mbs.gnu.core.toolchain.base">
+         </toolchain>
+         <toolchain
+               toolchainID="org.openhwgroup.corev.ide.mbs.llvm.core.toolchain.base">
+         </toolchain>
+      </wizardPage>
+   </extension>
+
+</plugin>
