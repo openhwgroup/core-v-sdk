@@ -3,7 +3,7 @@ The purpose of this Quick Start Guide (QSG) is to get you up and running quickly
 Currently supported OSs are  Windows (10/11) and Linux (RH 7.9/8.4 & Ubuntu 18.04/20.04).
 
 # Getting Started
-Download the CORE-V SDK package ([64-bit Windows](https://www.ashling.com) /[64-bit Linux](https://www.ashling.com))
+Download the CORE-V SDK package ([64-bit Windows](http://downloads.openhwgroup.org/) /[64-bit Linux](http://downloads.openhwgroup.org/))
 
 ## Windows Installation
 Run the supplied installer executable and follow the installation wizard to install CORE-V-SDK in the directory of your choice. Installation includes all 
@@ -11,7 +11,7 @@ the necessary toolchain components, and the default directory is:
 ~~~
 C:\Users\[USER]\AppData\Local\OpenHW\CORE-V-SDKvX.Y.Z
 ~~~
-where XYZ is the version.
+where X.Y.Z is the version.
 ## Linux Installation
 CORE-V-SDK Linux installer is provided as a .run file. Add execution permission to the file using the command:
 ~~~
@@ -92,7 +92,7 @@ All other branches are development branches and may not be stable.
 
 #### Step 5: Select Projects to Import
 
-![image](https://user-images.githubusercontent.com/69203453/165951190-0ad42238-d802-40b0-b37a-60ed2bb34abf.png)
+![image](https://user-images.githubusercontent.com/69203453/166695499-76e08d86-8af1-4da4-b644-de6b37d2ee5d.png)
 
 
 ## Terminal window
