@@ -31,7 +31,7 @@ To import and run the sample cli-test project or qemu_32_example provided with t
 
 #### Step 1: Launch IDE
 ~~~
-Launch the CORE-V-SDK by double clicking on the "CORE-V-SDK" shortcut in Windows or "CORE-V-SDK.desktop" in Linux (from the installation location).
+Launch the CORE-V-SDK by double clicking on the "CORE-V-SDK" shortcut in Windows or "CORE-V-SDK.launch" in Linux (from the installation location).
 ~~~
 ![image](https://user-images.githubusercontent.com/69203453/166261343-412d61b7-6b86-41ac-9e07-bd2a5b25338d.png)
 
