@@ -23,7 +23,7 @@ $./CORE-V-SDKSetupvX.Y.Z.run
 ~~~
  Installation includes all the necessary components, and the default directory is: 
 ~~~ 
- /home/CORE-V-SDKvX.Y.Z/
+ /home/username/OpenHW/CORE-V-SDKvX.Y.Z/
 ~~~
 
 ### Import Sample Project
