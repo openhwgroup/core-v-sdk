@@ -66,6 +66,20 @@ Under the `Run` menu select `Debug Configurations...`
 1. Under `GDB OpenOCD Debugging` select `cli_test Ashling Opella-LD` or `cli_test hs2` and then `Debug`, or for QEMU:
 2. Under `RISC-V QEMU Simulator Debugging` select `qemu_32_example` and then `Debug`
 
+#### Debugging on the FPGA Board 
+
+Remember that the JTAG port is not enabled unless SW0 is in the "up" position as described in the CORE-V-MCU [Quick Start Guide](https://github.com/openhwgroup/core-v-mcu/tree/master/emulation/quickstart).
+Letter (E) of figures available [here](https://github.com/openhwgroup/core-v-mcu/blob/master/emulation/quickstart/NexysA7_annotated.png).
+
+Also, if you get this error while trying to connect the Debugger on the SDK:
+
+```
+libusb_open() failed with LIBUSB_ERROR_ACCESS
+```
+Refer to the [Quick Start Guide](https://github.com/openhwgroup/core-v-mcu/tree/master/emulation/quickstart) to solve the error.
+
+
+
 ## How to Import Existing Projects from Git
 
 ![image](https://user-images.githubusercontent.com/69203453/166265280-5c0928d1-ba7c-492d-a06c-58182a3c7aa5.png)
