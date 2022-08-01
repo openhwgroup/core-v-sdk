@@ -73,6 +73,8 @@ public class DefaultPreferences extends org.eclipse.embedcdt.debug.gdbjtag.core.
 
 	public static final boolean DO_CONTINUE_DEFAULT = true;
 
+	public static final String DEFAULT_REGISTER_FILE = "${eclipse_home}/../registers/csr/gdb_reg_riscv_rv32.xml";
+
 	// ------------------------------------------------------------------------
 
 	// Debugger commands

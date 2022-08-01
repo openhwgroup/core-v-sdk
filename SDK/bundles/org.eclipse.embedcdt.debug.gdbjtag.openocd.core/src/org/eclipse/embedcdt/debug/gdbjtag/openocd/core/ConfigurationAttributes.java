@@ -72,5 +72,9 @@ public interface ConfigurationAttributes extends org.eclipse.embedcdt.debug.gdbj
 
 	public static final String DO_CONTINUE = PREFIX + ".doContinue"; //$NON-NLS-1$
 
+	public static final String GDB_SERVER_TARGET_REG_FILE_KEY = ".targetRegFile";
+
+	public static final String GDB_SERVER_TARGET_REG_FILE = PREFIX + GDB_SERVER_TARGET_REG_FILE_KEY; // $NON-NLS-1$
+
 	// ------------------------------------------------------------------------
 }

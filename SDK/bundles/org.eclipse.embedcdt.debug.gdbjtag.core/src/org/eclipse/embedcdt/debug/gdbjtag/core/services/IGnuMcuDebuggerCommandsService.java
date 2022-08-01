@@ -53,6 +53,8 @@ public interface IGnuMcuDebuggerCommandsService {
 
 	public IStatus addLoadImageCommands(List<String> commandsList);
 
+	public IStatus addRegisterFileCommands(List<String> commandsList, String regFilePath);
+
 	/**
 	 * Used by both FinalLaunchSequence & RestartProcessSequence.
 	 *

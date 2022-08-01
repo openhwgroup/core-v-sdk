@@ -638,7 +638,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 		return config;
 	}
 
-	public String registerFunction() {
+	public String getRegisterFile() {
 
 		String tempFileName = null;
 		try {

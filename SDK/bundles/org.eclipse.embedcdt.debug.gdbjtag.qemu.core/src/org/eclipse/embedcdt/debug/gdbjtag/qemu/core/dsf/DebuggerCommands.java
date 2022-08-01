@@ -190,5 +190,11 @@ public class DebuggerCommands extends GnuMcuDebuggerCommandsService {
 		return Status.OK_STATUS;
 	}
 
+	@Override
+	public IStatus addRegisterFileCommands(List<String> commandsList, String regFilePath) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	// ------------------------------------------------------------------------
 }
