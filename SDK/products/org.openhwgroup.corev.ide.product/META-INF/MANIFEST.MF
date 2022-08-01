@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Product
+Bundle-SymbolicName: org.openhwgroup.corev.ide.product
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: org.openhwgroup.corev.ide.product
+Bundle-RequiredExecutionEnvironment: JavaSE-15

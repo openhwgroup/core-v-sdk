@@ -28,25 +28,31 @@
 		<module>..\..\bundles\org.openhwgroup.corev.ide.toolchains.gnu</module>
 		<module>..\..\bundles\org.openhwgroup.corev.ide.toolchains.gnu.core</module>
 		<module>..\..\bundles\org.openhwgroup.corev.ide.toolchains.gnu.ui</module>
-		<module>..\..\features\org.openhwgroup.corev.ide.toolchains.gnu.feature</module>
 		<module>..\..\bundles\org.openhwgroup.corev.ide.debug.ui</module>
 		<module>..\..\bundles\org.eclipse.embedcdt.debug.gdbjtag.qemu.core</module>
 		<module>..\..\bundles\org.eclipse.embedcdt.debug.gdbjtag.qemu.ui</module>
-		<module>..\..\features\org.openhwgroup.corev.ide.cdt.feature</module>
-
+		<module>..\..\bundles\com.ashling.riscfree.debug.jaxb</module>
+		<module>..\..\bundles\com.ashling.riscfree.debug.opxd.registers</module>
+		<module>..\..\bundles\org.eclipse.embedcdt.debug.gdbjtag.core</module>
+		<module>..\..\bundles\org.eclipse.embedcdt.debug.gdbjtag.openocd.core</module>
+		<module>..\..\bundles\org.eclipse.embedcdt.debug.gdbjtag.openocd.ui</module>			
 		<module>..\..\bundles\org.openhwgroup.corev.ide.doc.user</module>
-
 		<module>..\..\bundles\org.openhwgroup.corev.ide</module>
 		<module>..\..\bundles\org.openhwgroup.corev.ide.ui.workbench</module>
 		<module>..\..\bundles\org.openhwgroup.corev.ide.definition</module>
 		<module>..\..\bundles\org.openhwgroup.corev.ide.definition.ui</module>
 		<module>..\..\bundles\org.openhwgroup.corev.ide.p2.ui</module>
 		<module>..\..\bundles\org.openhwgroup.corev.ide.seal</module>
+		<module>..\..\features\org.eclipse.embedcdt.debug.gdbjtag-feature</module>
+		<module>..\..\features\org.eclipse.embedcdt.debug.gdbjtag.openocd-feature</module>
+		
 		<module>..\..\features\org.openhwgroup.corev.ide.feature</module>
+		<module>..\..\features\com.ashling.riscfree.register.feature</module>
 
 		<module>..\..\releng\org.openhwgroup.corev.ide.repository</module>
+		<module>..\..\features\org.openhwgroup.corev.ide.toolchains.gnu.feature</module>
+		<module>..\..\features\org.openhwgroup.corev.ide.cdt.feature</module>
 
-		<module>..\..\products\org.openhwgroup.corev.ide.product</module>
 	</modules>
 
 </project>

@@ -72,6 +72,8 @@
       <feature id="org.eclipse.tm.terminal.connector.telnet.feature" installMode="root"/>
       <feature id="org.eclipse.tm.terminal.feature" installMode="root"/>
       <feature id="org.eclipse.egit" installMode="root"/>
+      <feature id="org.eclipse.embedcdt.debug.gdbjtag" installMode="root"/>
+      <feature id="com.ashling.riscfree.register.feature" installMode="root"/>
    </features>
 
    <configurations>
