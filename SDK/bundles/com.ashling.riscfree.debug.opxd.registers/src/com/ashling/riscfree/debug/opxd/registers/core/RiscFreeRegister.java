@@ -66,7 +66,7 @@ import jakarta.xml.bind.Unmarshaller;
 public class RiscFreeRegister extends GDBRegisters_HEAD {
 
 	private RegisterDescriptionCache registerDescCache;
-	private String rootRegisterFile;
+	private String rootRegisterFilePath;
 	private String registerDirectory;
 	private List<String> registerGroups = new ArrayList<String>();
 	private String dtdLocation = resolvePath("${eclipse_home}/../registers/csr/DTD/");
@@ -76,7 +76,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 	 */
 	public RiscFreeRegister(DsfSession session, String rootRegisterFile, String registerDirectory) {
 		super(session);
-		this.rootRegisterFile = rootRegisterFile;
+		this.rootRegisterFilePath = rootRegisterFile;
 		this.registerDirectory = registerDirectory + File.separator;
 	}
 
@@ -95,8 +95,8 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 				new String[] { IRegisters.class.getName(), IRegisters2.class.getName(), MIRegisters.class.getName(),
 						GDBRegisters.class.getName(), RiscFreeRegister.class.getName() },
 				new Hashtable<String, String>());
-		if (rootRegisterFile != null && registerDirectory != null) {
-			registerDescCache = new RegisterDescriptionCache(new File(rootRegisterFile), registerDirectory);
+		if (rootRegisterFilePath != null && registerDirectory != null) {
+			registerDescCache = new RegisterDescriptionCache(new File(rootRegisterFilePath), registerDirectory);
 			registerDescCache.init(new RequestMonitor(getExecutor(), requestMonitor));
 			registerGroups.addAll(registerDescCache.getRegisterGroups());
 		}
@@ -639,12 +639,12 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 	}
 
 	public String getDefaultRegisterFilePath() {
-		return rootRegisterFile;
+		return rootRegisterFilePath;
 	}
 
 	public String getFormattedRegisterFilePath() {
 
-		String tempFileName = null;
+		String tempFilePath = null;
 		try {
 			SAXParserFactory spf = SAXParserFactory.newInstance();
 			spf.setXIncludeAware(true);
@@ -662,7 +662,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 				}
 				return null;
 			});
-			FileInputStream xmlStream = new FileInputStream(rootRegisterFile);
+			FileInputStream xmlStream = new FileInputStream(rootRegisterFilePath);
 			SAXSource src = new SAXSource(xr, new InputSource(xmlStream));
 			src.setSystemId(registerDirectory);
 			JAXBContext jaxbContext = JAXBContext.newInstance(Target.class);
@@ -688,7 +688,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 			});
 
 			if (typeMap.isEmpty()) {
-				return rootRegisterFile;
+				return rootRegisterFilePath;
 			}
 
 			// Removing custom defined objects to make this in standard format
@@ -708,7 +708,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 			java.io.StringWriter sw = new StringWriter();
 			marshaller.marshal(target, sw);
 
-			String str = fileToString(rootRegisterFile);
+			String str = fileToString(rootRegisterFilePath);
 
 			// To remove commented code from xml since there could be commented target
 			// portions
@@ -716,17 +716,17 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 
 			// Finding the string to be replaced with marshaled string
 			String replaceString = str.substring(str.indexOf("<target"), str.indexOf("</target>") + 9);
-			tempFileName = dtdLocation + File.separator + new SimpleDateFormat("yyyyMMddHHmm'.xml'").format(new Date());
+			tempFilePath = dtdLocation + File.separator + new SimpleDateFormat("yyyyMMddHHmm'.xml'").format(new Date());
 
 			// creating template file by replacing replaceString with marshaled string
-			stringToFile(tempFileName, str.replace(replaceString, sw.toString()));
+			stringToFile(tempFilePath, str.replace(replaceString, sw.toString()));
 
 		} catch (Exception e) {
 			Activator.log(e);
-			return rootRegisterFile;
+			return rootRegisterFilePath;
 		}
 
-		return tempFileName;
+		return tempFilePath;
 	}
 
 	private void stringToFile(String tempFileName, String tempString) throws IOException {
