@@ -668,7 +668,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Target.class);
 			Unmarshaller unMarshaller = jaxbContext.createUnmarshaller();
 
-			//processing target object to find custom defined objects
+			// processing target object to find custom defined objects
 			Target target = (Target) unMarshaller.unmarshal(src);
 			Map<String, Object> typeMap = new HashMap<>();
 			target.getFeature().forEach(feature -> {
@@ -691,7 +691,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 				return rootRegisterFile;
 			}
 
-			//Removing custom defined objects to make this in standard format
+			// Removing custom defined objects to make this in standard format
 			target.getFeature().forEach(feature -> {
 				feature.getReg().forEach(reg -> {
 					if (typeMap.containsKey(reg.getType())) {
@@ -710,19 +710,22 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 
 			String str = fileToString(rootRegisterFile);
 
-			// To remove commented code from xml since there could be commented target portions
+			// To remove commented code from xml since there could be commented target
+			// portions
 			str = str.replaceAll("(?s)<!--.*?-->", "");
 
-			//Finding the string to be replaced with marshaled string 
+			// Finding the string to be replaced with marshaled string
 			String replaceString = str.substring(str.indexOf("<target"), str.indexOf("</target>") + 9);
 			tempFileName = dtdLocation + File.separator + new SimpleDateFormat("yyyyMMddHHmm'.xml'").format(new Date());
-			
-			//creating template file by replacing replaceString with marshaled string
+
+			// creating template file by replacing replaceString with marshaled string
 			stringToFile(tempFileName, str.replace(replaceString, sw.toString()));
 
 		} catch (Exception e) {
 			Activator.log(e);
+			return rootRegisterFile;
 		}
+
 		return tempFileName;
 	}
 
