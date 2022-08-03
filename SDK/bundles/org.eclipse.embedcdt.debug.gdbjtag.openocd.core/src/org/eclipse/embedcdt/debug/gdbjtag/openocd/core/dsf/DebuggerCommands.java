@@ -32,8 +32,6 @@ import org.osgi.framework.BundleContext;
 
 public class DebuggerCommands extends GnuMcuDebuggerCommandsService {
 
-	// ------------------------------------------------------------------------
-
 	public DebuggerCommands(DsfSession session, ILaunchConfiguration lc, String mode) {
 		super(session, lc, mode, true); // do double backslash
 	}
@@ -190,6 +188,14 @@ public class DebuggerCommands extends GnuMcuDebuggerCommandsService {
 				DefaultPreferences.DO_CONTINUE_DEFAULT)) {
 			commandsList.add(DefaultPreferences.DO_CONTINUE_COMMAND);
 		}
+
+		return Status.OK_STATUS;
+	}
+
+	@Override
+	public IStatus addRegisterFileCommands(List<String> commandsList, String regFilePath) {
+
+		commandsList.add("set tdesc filename " + regFilePath);
 
 		return Status.OK_STATUS;
 	}

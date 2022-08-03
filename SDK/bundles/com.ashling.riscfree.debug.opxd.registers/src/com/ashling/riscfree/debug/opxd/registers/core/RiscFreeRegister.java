@@ -1,8 +1,17 @@
 package com.ashling.riscfree.debug.opxd.registers.core;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -10,7 +19,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.eclipse.cdt.debug.core.ICDTLaunchConfigurationConstants;
+import javax.xml.parsers.SAXParserFactory;
+import javax.xml.transform.sax.SAXSource;
+
 import org.eclipse.cdt.dsf.concurrent.DataRequestMonitor;
 import org.eclipse.cdt.dsf.concurrent.ImmediateExecutor;
 import org.eclipse.cdt.dsf.concurrent.ImmediateRequestMonitor;
@@ -22,21 +33,31 @@ import org.eclipse.cdt.dsf.debug.service.IFormattedValues;
 import org.eclipse.cdt.dsf.debug.service.IRegisters;
 import org.eclipse.cdt.dsf.debug.service.IRegisters2;
 import org.eclipse.cdt.dsf.debug.service.IStack.IFrameDMContext;
-import org.eclipse.cdt.dsf.gdb.internal.GdbPlugin;
 import org.eclipse.cdt.dsf.gdb.service.GDBRegisters;
-import org.eclipse.cdt.dsf.gdb.service.IGDBGrouping.IGroupDMContext;
 import org.eclipse.cdt.dsf.gdb.service.extensions.GDBRegisters_HEAD;
 import org.eclipse.cdt.dsf.mi.service.MIRegisters;
 import org.eclipse.cdt.dsf.service.DsfSession;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
 
 import com.ashling.riscfree.debug.opxd.registers.Activator;
+import com.ashling.riscfree.debug.opxd.registers.generated.Enum;
+import com.ashling.riscfree.debug.opxd.registers.generated.Flags;
+import com.ashling.riscfree.debug.opxd.registers.generated.Struct;
+import com.ashling.riscfree.debug.opxd.registers.generated.Target;
+import com.ashling.riscfree.debug.opxd.registers.generated.Union;
+import com.ashling.riscfree.debug.opxd.registers.generated.Vector;
 import com.google.common.primitives.UnsignedLong;
+
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 
 /**
  * @author vinod.appu
@@ -45,18 +66,18 @@ import com.google.common.primitives.UnsignedLong;
 public class RiscFreeRegister extends GDBRegisters_HEAD {
 
 	private RegisterDescriptionCache registerDescCache;
-	private String rootRegisterFile;
+	private String rootRegisterFilePath;
 	private String registerDirectory;
 	private List<String> registerGroups = new ArrayList<String>();
+	private String dtdLocation = resolvePath("${eclipse_home}/../registers/csr/DTD/");
 
 	/**
 	 * @param session
 	 */
 	public RiscFreeRegister(DsfSession session, String rootRegisterFile, String registerDirectory) {
 		super(session);
-		this.rootRegisterFile = rootRegisterFile;
-		// Ensure the path separator is available in the end
-		this.registerDirectory = registerDirectory+File.separator;
+		this.rootRegisterFilePath = rootRegisterFile;
+		this.registerDirectory = registerDirectory + File.separator;
 	}
 
 	@Override
@@ -74,8 +95,8 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 				new String[] { IRegisters.class.getName(), IRegisters2.class.getName(), MIRegisters.class.getName(),
 						GDBRegisters.class.getName(), RiscFreeRegister.class.getName() },
 				new Hashtable<String, String>());
-		if (rootRegisterFile != null && registerDirectory != null) {
-			registerDescCache = new RegisterDescriptionCache(new File(rootRegisterFile), registerDirectory);
+		if (rootRegisterFilePath != null && registerDirectory != null) {
+			registerDescCache = new RegisterDescriptionCache(new File(rootRegisterFilePath), registerDirectory);
 			registerDescCache.init(new RequestMonitor(getExecutor(), requestMonitor));
 			registerGroups.addAll(registerDescCache.getRegisterGroups());
 		}
@@ -171,7 +192,8 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 
 			fMnemonics = mmemonicList.toArray(new Mnemonic[mmemonicList.size()]);
 
-			fMnemonicValue = mmemonicList.stream().filter(p -> bitField.getValue()!= null && p.getValue() == bitField.getValue()).findAny()
+			fMnemonicValue = mmemonicList.stream()
+					.filter(p -> bitField.getValue() != null && p.getValue() == bitField.getValue()).findAny()
 					.orElse(null);
 		}
 
@@ -237,11 +259,11 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 	}
 
 	@Override
-	public void getBitFields(IDMContext regDmc, DataRequestMonitor<IBitFieldDMContext[]> rm) {		
+	public void getBitFields(IDMContext regDmc, DataRequestMonitor<IBitFieldDMContext[]> rm) {
 		final MIRegisterDMC registerDmc = DMContexts.getAncestorOfType(regDmc, MIRegisterDMC.class);
 		if (registerDmc == null) {
-			rm.setStatus(new Status(IStatus.ERROR, Activator.PLUGIN_ID, INVALID_HANDLE,
-					"Register context not found", null)); //$NON-NLS-1$
+			rm.setStatus(
+					new Status(IStatus.ERROR, Activator.PLUGIN_ID, INVALID_HANDLE, "Register context not found", null)); //$NON-NLS-1$
 			rm.done();
 			return;
 		}
@@ -280,8 +302,8 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 						protected void handleSuccess() {
 							BitFieldDMContext bitFieldDMC = ((BitFieldDMContext) bitFieldCtx);
 							try {
-								long registerValue = Long.parseLong(getData().getFormattedValue());								
-								long bitFieldVal = convertToLong(formatId, bitFieldValue);								
+								long registerValue = Long.parseLong(getData().getFormattedValue());
+								long bitFieldVal = convertToLong(formatId, bitFieldValue);
 								BitGroup bitGroup = bitFieldDMC.fBitField.getBitGroupList().get(0);
 								if (bitGroup != null) {
 									long repacedRegisterValue = replaceBits(registerValue, bitFieldVal,
@@ -320,17 +342,17 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 		if (!(dmc instanceof BitFieldDMContext)) {
 			Activator.failRequest(rm, INVALID_HANDLE, "Invalid context"); //$NON-NLS-1$
 		}
-		
+
 		final IFrameDMContext frameDmc = DMContexts.getAncestorOfType(dmc, IFrameDMContext.class);
-        // Create bit field data with name only e.g. not editable.
-        if(frameDmc == null){
-        	BitField bitField = ((BitFieldDMContext)dmc).fBitField;
-        	bitField.isWritable = false;
-        	rm.setData(new BitFieldDMData(bitField));
-            rm.done();
-            return;
-        }
-		
+		// Create bit field data with name only e.g. not editable.
+		if (frameDmc == null) {
+			BitField bitField = ((BitFieldDMContext) dmc).fBitField;
+			bitField.isWritable = false;
+			rm.setData(new BitFieldDMData(bitField));
+			rm.done();
+			return;
+		}
+
 		BitFieldDMContext bitFieldDmc = (BitFieldDMContext) dmc;
 		getBitFieldDataValue((BitFieldDMContext) dmc, DECIMAL_FORMAT,
 				new DataRequestMonitor<FormattedValueDMData>(ImmediateExecutor.getInstance(), rm) {
@@ -339,9 +361,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 						String formattedValue = getData().getFormattedValue();
 						if (!formattedValue.isEmpty()) {
 							bitFieldDmc.fBitField.setValue(Long.valueOf(formattedValue));
-						}
-						else
-						{
+						} else {
 							bitFieldDmc.fBitField.isWritable = false;
 						}
 						rm.setData(new BitFieldDMData(bitFieldDmc.fBitField));
@@ -350,7 +370,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 				});
 	}
 
-	//Added support for 64 bit (now reads as unsigned)
+	// Added support for 64 bit (now reads as unsigned)
 	private static long extractBits(BigInteger regVal, int startBit, long bitCount) {
 		BigInteger bitmask = BigInteger.valueOf(((1 << bitCount) - 1) << startBit);
 		return (regVal.and(bitmask)).shiftRight(startBit).longValue();
@@ -397,13 +417,13 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 		}
 
 		final IFrameDMContext frameDmc = DMContexts.getAncestorOfType(bitFieldDMContext, IFrameDMContext.class);
-        // Create bit field data with name only e.g. not editable.
-        if(frameDmc == null){
-        	rm.setData( new FormattedValueDMData( BLANK_STRING ));
-            rm.done();
-            return;
-        }
-        
+		// Create bit field data with name only e.g. not editable.
+		if (frameDmc == null) {
+			rm.setData(new FormattedValueDMData(BLANK_STRING));
+			rm.done();
+			return;
+		}
+
 		super.getFormattedExpressionValue(getFormattedValueContext(registerDmc, IFormattedValues.HEX_FORMAT),
 				new DataRequestMonitor<FormattedValueDMData>(ImmediateExecutor.getInstance(), rm) {
 					@Override
@@ -459,30 +479,14 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 
 	@Override
 	public void getRegisterGroups(IDMContext ctx, DataRequestMonitor<IRegisterGroupDMContext[]> rm) {
-		if(DMContexts.getAncestorOfType(ctx, IGroupDMContext.class) != null) {
-			IStatus status = new Status(IStatus.ERROR, GdbPlugin.PLUGIN_ID, INVALID_HANDLE,
-					"No register groups are present for group context", null); //$NON-NLS-1$
-			rm.setStatus(status);
-			rm.done();
-			return;
-		}
 		if (registerDescCache != null) {
 			super.getRegisterGroups(ctx,
 					new DataRequestMonitor<IRegisters.IRegisterGroupDMContext[]>(getExecutor(), rm) {
 						@Override
 						protected void handleSuccess() {
 							final IRegisterGroupDMContext[] regGroups = getData();
-							boolean loadRegisterGroupsFromConfig = true;
-							ILaunchConfigurationWorkingCopy wc;
-							try {
-								wc = getLaunchConfig().getWorkingCopy();
-								loadRegisterGroupsFromConfig = wc.getAttribute(
-										ICDTLaunchConfigurationConstants.ATTR_DEBUGGER_LOAD_REGISTER_GROUP_PERSISTANCE,
-										true);
-							} catch (CoreException e) {
-							}
 
-							if (!loadRegisterGroupsFromConfig || regGroups.length==1) {
+							if (regGroups.length == 1) {
 
 								getRegisters(ctx, new DataRequestMonitor<IRegisterDMContext[]>(getExecutor(), rm) {
 									@Override
@@ -499,8 +503,9 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 
 										final MIRegisterGroupDMC miGroupDMC = (MIRegisterGroupDMC) regGroups[0];
 										registerGroups.stream().sorted((o1, o2) -> {
-											
-											// Sorting logic used to get order as General purpose, csr then wdc then All regs.
+
+											// Sorting logic used to get order as General purpose, csr then wdc then All
+											// regs.
 											if (o1.length() != o2.length()) {
 												return o1.length() - o2.length();
 											} else {
@@ -567,7 +572,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 					}
 				});
 	}
-	
+
 	@Override
 	public void getRegisterData(IRegisterDMContext regDmc, DataRequestMonitor<IRegisterDMData> rm) {
 		super.getRegisterData(regDmc, new DataRequestMonitor<IRegisters.IRegisterDMData>(getExecutor(), rm) {
@@ -592,11 +597,11 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 			}
 		});
 	}
-	
-	private long convertToLong(String formatId, String bitFieldValue)
-	{
+
+	private long convertToLong(String formatId, String bitFieldValue) {
 		String formattedBitFieldVAlue = bitFieldValue;
-		if (formatId.equalsIgnoreCase(IFormattedValues.HEX_FORMAT) || formatId.equalsIgnoreCase(IFormattedValues.STRING_FORMAT)) {
+		if (formatId.equalsIgnoreCase(IFormattedValues.HEX_FORMAT)
+				|| formatId.equalsIgnoreCase(IFormattedValues.STRING_FORMAT)) {
 			if (!bitFieldValue.startsWith("0x")) { //$NON-NLS-1$
 				formattedBitFieldVAlue = "0x" + bitFieldValue; //$NON-NLS-1$
 			}
@@ -613,7 +618,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 		}
 		return bitFieldVal;
 	}
-	
+
 	@Override
 	public void restoreDefaultGroups(IDMContext selectionContext, RequestMonitor rm) {
 		if (registerDescCache != null) {
@@ -622,7 +627,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 		}
 		super.restoreDefaultGroups(selectionContext, rm);
 	}
-	
+
 	private ILaunchConfiguration getLaunchConfig() {
 		ILaunch launch = (ILaunch) getSession().getModelAdapter(ILaunch.class);
 		if (launch == null) {
@@ -631,5 +636,132 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 		}
 		ILaunchConfiguration config = launch.getLaunchConfiguration();
 		return config;
+	}
+
+	public String getDefaultRegisterFilePath() {
+		return rootRegisterFilePath;
+	}
+
+	public String getFormattedRegisterFilePath() {
+
+		String tempFilePath = null;
+		try {
+			SAXParserFactory spf = SAXParserFactory.newInstance();
+			spf.setXIncludeAware(true);
+			spf.setNamespaceAware(true);
+			XMLReader xr = spf.newSAXParser().getXMLReader();
+			// be sure validation is "off" or the feature to ignore DTD's will not apply
+			xr.setFeature("http://xml.org/sax/features/validation", true); //$NON-NLS-1$
+			xr.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", true); //$NON-NLS-1$
+			xr.setEntityResolver((p, s) -> {
+				if (s.contains("gdb-target.dtd")) {
+					return new InputSource(new FileInputStream(dtdLocation + "gdb-target.dtd"));
+				}
+				if (s.contains("xinclude.dtd")) {
+					return new InputSource(new FileInputStream(dtdLocation + "xinclude.dtd"));
+				}
+				return null;
+			});
+			FileInputStream xmlStream = new FileInputStream(rootRegisterFilePath);
+			SAXSource src = new SAXSource(xr, new InputSource(xmlStream));
+			src.setSystemId(registerDirectory);
+			JAXBContext jaxbContext = JAXBContext.newInstance(Target.class);
+			Unmarshaller unMarshaller = jaxbContext.createUnmarshaller();
+
+			// processing target object to find custom defined objects
+			Target target = (Target) unMarshaller.unmarshal(src);
+			Map<String, Object> typeMap = new HashMap<>();
+			target.getFeature().forEach(feature -> {
+				feature.getVectorOrFlagsOrStructOrUnionOrEnum().forEach(type -> {
+					if (type instanceof Vector) {
+						typeMap.put(((Vector) type).getId(), type);
+					} else if (type instanceof Flags) {
+						typeMap.put(((Flags) type).getId(), type);
+					} else if (type instanceof Struct) {
+						typeMap.put(((Struct) type).getId(), type);
+					} else if (type instanceof Union) {
+						typeMap.put(((Union) type).getId(), type);
+					} else if (type instanceof Enum) {
+						typeMap.put(((Enum) type).getId(), type);
+					}
+				});
+			});
+
+			if (typeMap.isEmpty()) {
+				return rootRegisterFilePath;
+			}
+
+			// Removing custom defined objects to make this in standard format
+			target.getFeature().forEach(feature -> {
+				feature.getReg().forEach(reg -> {
+					if (typeMap.containsKey(reg.getType())) {
+						if (reg.getBitsize().equals("32")) {
+							reg.setType("uint32");
+						} else if (reg.getBitsize().equals("64")) {
+							reg.setType("uint64");
+						}
+					}
+				});
+			});
+			Marshaller marshaller = jaxbContext.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+			java.io.StringWriter sw = new StringWriter();
+			marshaller.marshal(target, sw);
+
+			String str = fileToString(rootRegisterFilePath);
+
+			// To remove commented code from xml since there could be commented target
+			// portions
+			str = str.replaceAll("(?s)<!--.*?-->", "");
+
+			// Finding the string to be replaced with marshaled string
+			String replaceString = str.substring(str.indexOf("<target"), str.indexOf("</target>") + 9);
+			tempFilePath = dtdLocation + File.separator + new SimpleDateFormat("yyyyMMddHHmm'.xml'").format(new Date());
+
+			// creating template file by replacing replaceString with marshaled string
+			stringToFile(tempFilePath, str.replace(replaceString, sw.toString()));
+
+		} catch (Exception e) {
+			Activator.log(e);
+			return rootRegisterFilePath;
+		}
+
+		return tempFilePath;
+	}
+
+	private void stringToFile(String tempFileName, String tempString) throws IOException {
+		File tempFile = new File(tempFileName);
+		if (tempFile.createNewFile()) {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(tempFileName));
+			writer.write(tempString);
+
+			writer.close();
+		}
+	}
+
+	private String fileToString(String filePath) {
+
+		StringBuilder builder = new StringBuilder();
+		try (BufferedReader buffer = new BufferedReader(new FileReader(filePath))) {
+			String str;
+			while ((str = buffer.readLine()) != null) {
+
+				builder.append(str).append("\n");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return builder.toString();
+	}
+
+	private String resolvePath(String value) {
+		try {
+			// Do not report undefined variables
+			value = VariablesPlugin.getDefault().getStringVariableManager().performStringSubstitution(value, false)
+					.trim();
+		} catch (CoreException e) {
+		}
+		return value;
 	}
 }

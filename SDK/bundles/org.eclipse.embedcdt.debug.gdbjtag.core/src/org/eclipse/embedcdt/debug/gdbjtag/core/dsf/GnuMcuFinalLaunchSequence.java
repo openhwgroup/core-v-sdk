@@ -14,6 +14,7 @@
 
 package org.eclipse.embedcdt.debug.gdbjtag.core.dsf;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +25,7 @@ import org.eclipse.cdt.debug.gdbjtag.core.jtagdevice.DefaultGDBJtagDeviceImpl;
 import org.eclipse.cdt.debug.gdbjtag.core.jtagdevice.IGDBJtagDevice;
 import org.eclipse.cdt.dsf.concurrent.RequestMonitor;
 import org.eclipse.cdt.dsf.concurrent.RequestMonitorWithProgress;
+import org.eclipse.cdt.dsf.debug.service.IRegisters;
 import org.eclipse.cdt.dsf.gdb.launching.GdbLaunch;
 import org.eclipse.cdt.dsf.gdb.service.IGDBBackend;
 import org.eclipse.cdt.dsf.gdb.service.command.IGDBControl;
@@ -39,6 +41,8 @@ import org.eclipse.embedcdt.debug.gdbjtag.core.services.IGnuMcuDebuggerCommandsS
 import org.eclipse.embedcdt.debug.gdbjtag.core.services.IPeripheralMemoryService;
 import org.eclipse.embedcdt.debug.gdbjtag.core.services.IPeripheralsService;
 import org.eclipse.embedcdt.internal.debug.gdbjtag.core.Activator;
+
+import com.ashling.riscfree.debug.opxd.registers.core.RiscFreeRegister;
 
 public class GnuMcuFinalLaunchSequence extends GDBJtagDSFFinalLaunchSequence {
 
@@ -66,7 +70,7 @@ public class GnuMcuFinalLaunchSequence extends GDBJtagDSFFinalLaunchSequence {
 	private String[] jtagPreInitSteps = {};
 
 	private String[] jtagResetStep = { "stepGnuMcuReset" };
-	private String[] jtagStartStep = { "stepGnuMcuStart" };
+	private String[] jtagStartStep = { "stepGnuMcuStart", "stepAddTargetDescription" };
 
 	private String[] jtagToRemove = { "stepLoadSymbols", "stepResetBoard", "stepDelayStartup", "stepHaltBoard",
 			"stepUserInitCommands", "stepLoadImage", "stepSetProgramCounter", "stepStopScript", "stepResumeScript",
@@ -387,6 +391,43 @@ public class GnuMcuFinalLaunchSequence extends GDBJtagDSFFinalLaunchSequence {
 		}
 
 		queueCommands(commandsList, rm);
+	}
+
+	@Execute
+	public void stepAddTargetDescription(final RequestMonitor rm) {
+
+		String regFilePath = null;
+
+		IRegisters fCommandControl = fTracker.getService(IRegisters.class);
+		if (fCommandControl instanceof RiscFreeRegister) {
+			regFilePath = ((RiscFreeRegister) fCommandControl).getFormattedRegisterFilePath();
+		} else {
+			rm.done();
+			return;
+		}
+		final List<String> commandsList = new ArrayList<>();
+
+		IStatus status = fDebuggerCommands.addRegisterFileCommands(commandsList, regFilePath);
+		if (!status.isOK()) {
+			rm.setStatus(status);
+			rm.done();
+			return;
+		}
+		File tempFile = new File(regFilePath);
+		queueCommands(commandsList, new RequestMonitor(getExecutor(), rm) {
+			@Override
+			protected void handleCompleted() {
+				//if this is the default register file instead of temp register file no need to delete this
+				if (!((RiscFreeRegister) fCommandControl).getDefaultRegisterFilePath()
+						.equalsIgnoreCase(tempFile.getAbsolutePath())) {
+					if (tempFile.exists()) {
+						tempFile.delete();
+					}
+				}
+				super.handleCompleted();
+			}
+		});
+
 	}
 
 	// ------------------------------------------------------------------------

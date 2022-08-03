@@ -112,6 +112,9 @@ public class TabDebugger extends AbstractLaunchConfigurationTab {
 
 	private DefaultPreferences fDefaultPreferences;
 	private PersistentPreferences fPersistentPreferences;
+	private Text registerFile;
+	private Button registerFileBrowseButton;
+	private Button registerFileVariableButton;
 
 	// ------------------------------------------------------------------------
 
@@ -569,6 +572,32 @@ public class TabDebugger extends AbstractLaunchConfigurationTab {
 			fGdbClientOtherCommands.setLayoutData(gd);
 		}
 
+		{
+			Label label = new Label(comp, SWT.NONE);
+			label.setText(Messages.getString("DebuggerTab.gdbRegisterFile"));
+			label.setToolTipText(Messages.getString("DebuggerTab.gdbRegisterFile_ToolTipText"));
+
+			Composite local = new Composite(comp, SWT.NONE);
+			GridLayout layout = new GridLayout();
+			layout.numColumns = 3;
+			layout.marginHeight = 0;
+			layout.marginWidth = 0;
+			local.setLayout(layout);
+			GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+			gd.horizontalSpan = ((GridLayout) comp.getLayout()).numColumns - 1;
+			local.setLayoutData(gd);
+			{
+				registerFile = new Text(local, SWT.SINGLE | SWT.BORDER);
+				gd = new GridData(GridData.FILL_HORIZONTAL);
+				registerFile.setLayoutData(gd);
+				registerFileBrowseButton = new Button(local, SWT.NONE);
+				registerFileBrowseButton.setText(Messages.getString("DebuggerTab.gdbRegisterFile_Browse"));
+				registerFileVariableButton = new Button(local, SWT.NONE);
+				registerFileVariableButton.setText(Messages.getString("DebuggerTab.gdbRegisterFileVariable"));
+
+			}
+		}
+
 		// ----- Actions ------------------------------------------------------
 
 		fDoStartGdbClient.addSelectionListener(new SelectionAdapter() {
@@ -614,6 +643,29 @@ public class TabDebugger extends AbstractLaunchConfigurationTab {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				variablesButtonSelected(fGdbClientExecutable);
+			}
+		});
+
+		registerFile.addModifyListener(new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent e) {
+
+				scheduleUpdateJob(); // provides much better performance for
+										// Text listeners
+			}
+		});
+
+		registerFileBrowseButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				browseButtonSelected(Messages.getString("DebuggerTab.gdbRegisterFile_Title"), registerFile);
+			}
+		});
+
+		registerFileVariableButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				variablesButtonSelected(registerFile);
 			}
 		});
 	}
@@ -845,6 +897,8 @@ public class TabDebugger extends AbstractLaunchConfigurationTab {
 					IGDBLaunchConfigurationConstants.ATTR_DEBUGGER_UPDATE_THREADLIST_ON_SUSPEND,
 					DefaultPreferences.UPDATE_THREAD_LIST_DEFAULT);
 			fUpdateThreadlistOnSuspend.setSelection(updateThreadsOnSuspend);
+
+			registerFile.setText(configuration.getAttribute(ConfigurationAttributes.GDB_SERVER_TARGET_REG_FILE, ""));
 
 		} catch (CoreException e) {
 			Activator.log(e.getStatus());
@@ -1151,6 +1205,8 @@ public class TabDebugger extends AbstractLaunchConfigurationTab {
 			System.out.println(
 					"openocd.TabDebugger.performApply() completed " + configuration.getName() + ", dirty=" + isDirty());
 		}
+
+		configuration.setAttribute(ConfigurationAttributes.GDB_SERVER_TARGET_REG_FILE, registerFile.getText());
 	}
 
 	@Override
@@ -1217,6 +1273,8 @@ public class TabDebugger extends AbstractLaunchConfigurationTab {
 			defaultString = fPersistentPreferences.getGdbClientCommands();
 			configuration.setAttribute(ConfigurationAttributes.GDB_CLIENT_OTHER_COMMANDS, defaultString);
 		}
+
+		configuration.setAttribute(ConfigurationAttributes.GDB_SERVER_TARGET_REG_FILE, "");
 
 		// Force thread update
 		configuration.setAttribute(IGDBLaunchConfigurationConstants.ATTR_DEBUGGER_UPDATE_THREADLIST_ON_SUSPEND,

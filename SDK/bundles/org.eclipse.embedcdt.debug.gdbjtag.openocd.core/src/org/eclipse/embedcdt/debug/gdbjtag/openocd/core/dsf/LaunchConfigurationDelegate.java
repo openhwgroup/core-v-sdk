@@ -96,7 +96,7 @@ public class LaunchConfigurationDelegate extends AbstractGnuMcuLaunchConfigurati
 		}
 
 		fConfig = config;
-		return new ServicesFactory(version, mode);
+		return new ServicesFactory(fConfig, version, mode);
 		// return new GdbJtagDebugServicesFactory(version);
 	}
 
