@@ -18,6 +18,11 @@ public class Activator extends AbstractUIPlugin {
 	private static Activator plugin;
 	
 	/**
+	 * Status code indicating an unexpected internal error.
+	 */
+	private static final int INTERNAL_ERROR = 150;
+	
+	/**
 	 * The constructor
 	 */
 	public Activator() {
@@ -47,5 +52,45 @@ public class Activator extends AbstractUIPlugin {
 	public static void failRequest(RequestMonitor rm, int code, String message) {
 		rm.setStatus(new Status(IStatus.ERROR, PLUGIN_ID, code, message, null));
 		rm.done();
+	}
+	
+	public static void logInfo(String message) {   	 	
+    	final IStatus status=new Status(IStatus.INFO,Activator.PLUGIN_ID,message);
+    	Activator.getDefault().getLog().log(status);
+    }
+
+	/**
+	 * Logs the specified status with this plug-in's log.
+	 *
+	 * @param status
+	 *            status to log
+	 */
+	public static void log(IStatus status) {
+		getDefault().getLog().log(status);
+	}
+
+	/**
+	 * Logs an internal error with the specified throwable
+	 *
+	 * @param e
+	 *            the exception to be logged
+	 */
+	public static void log(Throwable e) {
+		log(new Status(IStatus.ERROR, getUniqueIdentifier(), INTERNAL_ERROR,
+				"Internal Error", e)); //$NON-NLS-1$
+	}
+
+	private static String getUniqueIdentifier() {
+		return PLUGIN_ID;
+	}
+
+	/**
+	 * Logs an internal error with the specified message.
+	 *
+	 * @param message
+	 *            the error message to log
+	 */
+	public static void logErrorMessage(String message) {
+		log(new Status(IStatus.ERROR, getUniqueIdentifier(), INTERNAL_ERROR, message, null));
 	}
 }

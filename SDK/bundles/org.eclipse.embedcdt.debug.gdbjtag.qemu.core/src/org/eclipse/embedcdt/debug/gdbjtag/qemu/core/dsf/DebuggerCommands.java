@@ -192,8 +192,8 @@ public class DebuggerCommands extends GnuMcuDebuggerCommandsService {
 
 	@Override
 	public IStatus addRegisterFileCommands(List<String> commandsList, String regFilePath) {
-		// TODO Auto-generated method stub
-		return null;
+		//since reading target description functionality is not implemented in qemu launch
+		return Status.OK_STATUS;
 	}
 
 	// ------------------------------------------------------------------------

@@ -70,7 +70,7 @@ public class GnuMcuFinalLaunchSequence extends GDBJtagDSFFinalLaunchSequence {
 	private String[] jtagPreInitSteps = {};
 
 	private String[] jtagResetStep = { "stepGnuMcuReset" };
-	private String[] jtagStartStep = { "stepGnuMcuStart", "stepRegisterService" };
+	private String[] jtagStartStep = { "stepGnuMcuStart", "stepAddTargetDescription" };
 
 	private String[] jtagToRemove = { "stepLoadSymbols", "stepResetBoard", "stepDelayStartup", "stepHaltBoard",
 			"stepUserInitCommands", "stepLoadImage", "stepSetProgramCounter", "stepStopScript", "stepResumeScript",
@@ -394,13 +394,13 @@ public class GnuMcuFinalLaunchSequence extends GDBJtagDSFFinalLaunchSequence {
 	}
 
 	@Execute
-	public void stepRegisterService(final RequestMonitor rm) {
+	public void stepAddTargetDescription(final RequestMonitor rm) {
 
 		String regFilePath = null;
 
 		IRegisters fCommandControl = fTracker.getService(IRegisters.class);
 		if (fCommandControl instanceof RiscFreeRegister) {
-			regFilePath = ((RiscFreeRegister) fCommandControl).getRegisterFile();
+			regFilePath = ((RiscFreeRegister) fCommandControl).getFormattedRegisterFilePath();
 		} else {
 			rm.done();
 			return;
@@ -417,8 +417,12 @@ public class GnuMcuFinalLaunchSequence extends GDBJtagDSFFinalLaunchSequence {
 		queueCommands(commandsList, new RequestMonitor(getExecutor(), rm) {
 			@Override
 			protected void handleCompleted() {
-				if (tempFile.exists()) {
-					tempFile.delete();
+				//if this is the default register file instead of temp register file no need to delete this
+				if (!((RiscFreeRegister) fCommandControl).getDefaultRegisterFilePath()
+						.equalsIgnoreCase(tempFile.getAbsolutePath())) {
+					if (tempFile.exists()) {
+						tempFile.delete();
+					}
 				}
 				super.handleCompleted();
 			}

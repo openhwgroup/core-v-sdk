@@ -898,8 +898,7 @@ public class TabDebugger extends AbstractLaunchConfigurationTab {
 					DefaultPreferences.UPDATE_THREAD_LIST_DEFAULT);
 			fUpdateThreadlistOnSuspend.setSelection(updateThreadsOnSuspend);
 
-			registerFile.setText(configuration.getAttribute(ConfigurationAttributes.GDB_SERVER_TARGET_REG_FILE,
-					DefaultPreferences.DEFAULT_REGISTER_FILE));
+			registerFile.setText(configuration.getAttribute(ConfigurationAttributes.GDB_SERVER_TARGET_REG_FILE, ""));
 
 		} catch (CoreException e) {
 			Activator.log(e.getStatus());
@@ -975,7 +974,6 @@ public class TabDebugger extends AbstractLaunchConfigurationTab {
 
 		// Force thread update
 		fUpdateThreadlistOnSuspend.setSelection(DefaultPreferences.UPDATE_THREAD_LIST_DEFAULT);
-		registerFile.setText(DefaultPreferences.DEFAULT_REGISTER_FILE);
 	}
 
 	/*
@@ -1276,8 +1274,7 @@ public class TabDebugger extends AbstractLaunchConfigurationTab {
 			configuration.setAttribute(ConfigurationAttributes.GDB_CLIENT_OTHER_COMMANDS, defaultString);
 		}
 
-		configuration.setAttribute(ConfigurationAttributes.GDB_SERVER_TARGET_REG_FILE,
-				DefaultPreferences.DEFAULT_REGISTER_FILE);
+		configuration.setAttribute(ConfigurationAttributes.GDB_SERVER_TARGET_REG_FILE, "");
 
 		// Force thread update
 		configuration.setAttribute(IGDBLaunchConfigurationConstants.ATTR_DEBUGGER_UPDATE_THREADLIST_ON_SUSPEND,

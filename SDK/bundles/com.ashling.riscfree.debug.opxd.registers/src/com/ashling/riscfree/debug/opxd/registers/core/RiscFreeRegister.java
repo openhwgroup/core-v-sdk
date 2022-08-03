@@ -638,7 +638,11 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 		return config;
 	}
 
-	public String getRegisterFile() {
+	public String getDefaultRegisterFilePath() {
+		return rootRegisterFile;
+	}
+
+	public String getFormattedRegisterFilePath() {
 
 		String tempFileName = null;
 		try {
@@ -651,10 +655,10 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 			xr.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", true); //$NON-NLS-1$
 			xr.setEntityResolver((p, s) -> {
 				if (s.contains("gdb-target.dtd")) {
-					return new InputSource(new FileInputStream(dtdLocation + "\\gdb-target.dtd"));
+					return new InputSource(new FileInputStream(dtdLocation + "gdb-target.dtd"));
 				}
 				if (s.contains("xinclude.dtd")) {
-					return new InputSource(new FileInputStream(dtdLocation + "\\xinclude.dtd"));
+					return new InputSource(new FileInputStream(dtdLocation + "xinclude.dtd"));
 				}
 				return null;
 			});
@@ -664,8 +668,8 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Target.class);
 			Unmarshaller unMarshaller = jaxbContext.createUnmarshaller();
 
+			//processing target object to find custom defined objects
 			Target target = (Target) unMarshaller.unmarshal(src);
-			// Target target = JAXB.unmarshal(src, Target.class);
 			Map<String, Object> typeMap = new HashMap<>();
 			target.getFeature().forEach(feature -> {
 				feature.getVectorOrFlagsOrStructOrUnionOrEnum().forEach(type -> {
@@ -682,6 +686,12 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 					}
 				});
 			});
+
+			if (typeMap.isEmpty()) {
+				return rootRegisterFile;
+			}
+
+			//Removing custom defined objects to make this in standard format
 			target.getFeature().forEach(feature -> {
 				feature.getReg().forEach(reg -> {
 					if (typeMap.containsKey(reg.getType())) {
@@ -699,19 +709,24 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 			marshaller.marshal(target, sw);
 
 			String str = fileToString(rootRegisterFile);
-			//To remove commented code from xml
-			str=str.replaceAll( "(?s)<!--.*?-->", "" );
+
+			// To remove commented code from xml since there could be commented target portions
+			str = str.replaceAll("(?s)<!--.*?-->", "");
+
+			//Finding the string to be replaced with marshaled string 
 			String replaceString = str.substring(str.indexOf("<target"), str.indexOf("</target>") + 9);
-			tempFileName = dtdLocation +File.separator+ new SimpleDateFormat("yyyyMMddHHmm'.xml'").format(new Date());
-			StringToFile(tempFileName, str.replace(replaceString, sw.toString()));
+			tempFileName = dtdLocation + File.separator + new SimpleDateFormat("yyyyMMddHHmm'.xml'").format(new Date());
+			
+			//creating template file by replacing replaceString with marshaled string
+			stringToFile(tempFileName, str.replace(replaceString, sw.toString()));
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Activator.log(e);
 		}
 		return tempFileName;
 	}
 
-	private void StringToFile(String tempFileName, String tempString) throws IOException {
+	private void stringToFile(String tempFileName, String tempString) throws IOException {
 		File tempFile = new File(tempFileName);
 		if (tempFile.createNewFile()) {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(tempFileName));
