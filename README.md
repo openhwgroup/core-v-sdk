@@ -116,14 +116,17 @@ Select "Local Terminal"
 
 ## CSR Register View
 
+CORE-V-SDK supports Debugger Register View support for CSR Registers.To see the register view,
+
 Browse the register file from the given location 
 
 `C:\Users\[USER]\AppData\Local\OpenHW\CORE-V-SDKvX.Y.Z\registers\csr\gdb_reg_riscv_rv32.xml`
 
 ![image](https://user-images.githubusercontent.com/69203453/182455819-7a9372c1-069c-4838-8185-e60d7a6f7326.png)
 
+To open the view, 
 ~~~
-Select Window -> Show View -> Other... -> search "Register view"
+Select Window -> Show View -> Other... -> search "Registers"
 ~~~
 
 ![image](https://user-images.githubusercontent.com/69203453/182458391-e45da9f2-981b-417b-82ec-f2cdff7ddd32.png)
