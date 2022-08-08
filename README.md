@@ -2,7 +2,7 @@
 
 # CORE-V-SDK Quick Start Guide
 The purpose of this Quick Start Guide (QSG) is to get you up and running quickly with the CORE-V-SDK on one of the various supported operating system platforms.
-Currently supported OSs are  Windows (10/11) and Linux (RH 7.9/8.4 & Ubuntu 18.04/20.04).
+Currently supported OSs are Windows (10/11) and Linux (RH 7.9/8.4 & Ubuntu 18.04/20.04). Note: only the x86 architecture is supported (Arm is not supported).
 
 # Getting Started
 Download the CORE-V SDK package ([64-bit Windows](http://downloads.openhwgroup.org/) /[64-bit Linux](http://downloads.openhwgroup.org/))
