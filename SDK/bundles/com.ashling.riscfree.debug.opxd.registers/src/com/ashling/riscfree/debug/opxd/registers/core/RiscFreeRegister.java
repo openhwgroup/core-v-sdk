@@ -642,7 +642,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 		return rootRegisterFilePath;
 	}
 
-	public String getFormattedRegisterFilePath() {
+	public String createFormattedTempRegisterFile() {
 
 		String tempFilePath = null;
 		try {
@@ -749,7 +749,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 				builder.append(str).append("\n");
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			Activator.log(e);
 		}
 
 		return builder.toString();
@@ -761,6 +761,7 @@ public class RiscFreeRegister extends GDBRegisters_HEAD {
 			value = VariablesPlugin.getDefault().getStringVariableManager().performStringSubstitution(value, false)
 					.trim();
 		} catch (CoreException e) {
+			Activator.log(e);
 		}
 		return value;
 	}

@@ -393,6 +393,9 @@ public class GnuMcuFinalLaunchSequence extends GDBJtagDSFFinalLaunchSequence {
 		queueCommands(commandsList, rm);
 	}
 
+	/*
+	 * This step will add the register description file which is chosen from the from the Debugger tab
+	 */
 	@Execute
 	public void stepAddTargetDescription(final RequestMonitor rm) {
 
@@ -400,7 +403,7 @@ public class GnuMcuFinalLaunchSequence extends GDBJtagDSFFinalLaunchSequence {
 
 		IRegisters fCommandControl = fTracker.getService(IRegisters.class);
 		if (fCommandControl instanceof RiscFreeRegister) {
-			regFilePath = ((RiscFreeRegister) fCommandControl).getFormattedRegisterFilePath();
+			regFilePath = ((RiscFreeRegister) fCommandControl).createFormattedTempRegisterFile();
 		} else {
 			rm.done();
 			return;
@@ -417,7 +420,7 @@ public class GnuMcuFinalLaunchSequence extends GDBJtagDSFFinalLaunchSequence {
 		queueCommands(commandsList, new RequestMonitor(getExecutor(), rm) {
 			@Override
 			protected void handleCompleted() {
-				//if this is the default register file instead of temp register file no need to delete this
+				//if this is the default register file instead of temporary register file no need to delete this
 				if (!((RiscFreeRegister) fCommandControl).getDefaultRegisterFilePath()
 						.equalsIgnoreCase(tempFile.getAbsolutePath())) {
 					if (tempFile.exists()) {
