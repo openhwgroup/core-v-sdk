@@ -13,7 +13,7 @@
 	Contributors:
 		Alexander Fedorov (ArSysOp) - initial API and implementation
 -->
-<product name="CORE-V-SDK" uid="org.openhwgroup.corev.ide.product" id="org.openhwgroup.corev.ide.product" application="org.eclipse.ui.ide.workbench" version="0.0.0.1" useFeatures="true" includeLaunchers="true">
+<product name="CORE-V-SDK" uid="org.openhwgroup.corev.ide.product" id="org.openhwgroup.corev.ide.product" application="org.eclipse.ui.ide.workbench" version="0.0.0.3" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -33,13 +33,13 @@
       <win useIco="false">
          <ico path="icons/OpenHW_Icon.ico"/>
          <bmp
-            winSmallHigh="icons/coreicon16x16_32bit.bmp"
-            winSmallLow="icons/coreicon16x16_8bit.bmp"
-            winMediumHigh="icons/coreicon32x32_32bit.bmp"
-            winMediumLow="icons/coreicon32x32_8bit.bmp"
-            winLargeHigh="icons/coreicon48x48_32bit.bmp"
-            winLargeLow="icons/coreicon48x48_8bit.bmp"
-            winExtraLargeHigh="icons/coreicon256x256_32bit.bmp"/>
+            winSmallHigh="/org.openhwgroup.corev.ide/icons/coreicon16x16_32bit.bmp"
+            winSmallLow="/org.openhwgroup.corev.ide.product/icons/coreicon16x16_8bit.bmp"
+            winMediumHigh="/org.openhwgroup.corev.ide.product/icons/coreicon32x32_32bit.bmp"
+            winMediumLow="/org.openhwgroup.corev.ide.product/icons/coreicon32x32_8bit.bmp"
+            winLargeHigh="/org.openhwgroup.corev.ide.product/icons/coreicon48x48_32bit.bmp"
+            winLargeLow="/org.openhwgroup.corev.ide.product/icons/coreicon48x48_8bit.bmp"
+            winExtraLargeHigh="/org.openhwgroup.corev.ide.product/icons/coreicon256x256_32bit.bmp"/>
       </win>
    </launcher>
 

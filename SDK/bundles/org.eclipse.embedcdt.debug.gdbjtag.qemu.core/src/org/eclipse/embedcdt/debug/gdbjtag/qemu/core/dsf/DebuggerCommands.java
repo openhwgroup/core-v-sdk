@@ -190,5 +190,11 @@ public class DebuggerCommands extends GnuMcuDebuggerCommandsService {
 		return Status.OK_STATUS;
 	}
 
+	@Override
+	public IStatus addRegisterFileCommands(List<String> commandsList, String regFilePath) {
+		//since reading target description functionality is not implemented in qemu launch
+		return Status.OK_STATUS;
+	}
+
 	// ------------------------------------------------------------------------
 }
