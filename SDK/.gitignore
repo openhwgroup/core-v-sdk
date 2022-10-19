@@ -27,7 +27,6 @@ target/
 *.ctxt
 
 # Package Files #
-*.jar
 *.war
 *.ear
 *.zip
