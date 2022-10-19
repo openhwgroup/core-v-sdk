@@ -61,6 +61,11 @@
 		<module>..\..\bundles\com.ashling.riscfree.debug.osawareness.ui</module>
 		<module>..\..\bundles\com.ashling.riscfree.globalvariable.view</module>
 		<module>..\..\bundles\com.ashling.riscfree.debug.opxd.emf</module>
+		<module>..\..\bundles\org.eclipse.cdt.dsf.gdb</module>
+		<module>..\..\features\org.eclipse.cdt.gnu.dsf-feature</module>
+		<module>..\..\features\org.eclipse.cdt-feature</module>
+		
+		
 
 		
 

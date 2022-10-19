@@ -339,6 +339,10 @@
 								<plugin id="org.openhwgroup.corev.ide" />
 								<plugin id="org.openhwgroup.corev.ide.toolchains.gnu" />
 								<plugin id="com.ashling.riscfree.debug.jaxb" />
+								<feature id="org.eclipse.cdt.platform"/>
+								<feature id="org.eclipse.cdt.gnu.build"/>
+								<feature id="org.eclipse.cdt.gdb"/>
+								<feature id="org.eclipse.cdt.gnu.debug"/>
 							</excludes>
 						</configuration>
 					</execution>
