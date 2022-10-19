@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabs">
+      <tab
+            class="com.ashling.riscfree.debug.osawareness.ui.tab.TabOSAwareness"
+            group="com.ashling.riscfree.debug.opxd.launchConfigurationTabGroup"
+            id="com.ashling.riscfree.debug.osawareness.tab"
+            name="OS Awareness">
+         <placement
+               after="com.ashling.riscfree.debug.opxd.ui.startuptab">
+         </placement>
+      </tab>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabs">
+      <tab
+            class="com.ashling.riscfree.debug.osawareness.ui.tab.TabOSAwareness"
+            group="ilg.gnumcueclipse.debug.gdbjtag.openocd.launchConfigurationTabGroup"
+            id="com.ashling.riscfree.debug.osawareness.tab"
+            name="OS Awareness">
+         <placement
+               after="org.eclipse.embedcdt.debug.gdbjtag.openocd.ui.ui.startuptab">
+         </placement>
+      </tab>
+   </extension>
+   
+     <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabs">
+      <tab
+            class="com.ashling.riscfree.debug.osawareness.ui.tab.TabOSAwareness"
+            group="ilg.gnumcueclipse.debug.gdbjtag.qemu.launchConfigurationTabGroup"
+            id="com.ashling.riscfree.debug.osawareness.tab"
+            name="OS Awareness">
+         <placement
+               after="ilg.gnumcueclipse.debug.gdbjtag.qemu.ui.startuptab">
+         </placement>
+      </tab>
+   </extension>
+
+</plugin>

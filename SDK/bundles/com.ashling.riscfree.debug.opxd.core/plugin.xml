@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="com.ashling.riscfree.debug.opxd.core.Startup">
+      </startup>
+   </extension>
+   
+   
+   <extension
+         id="com.ashling.comrv.marker"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.marker">
+      </super>
+      <persistent
+            value="false">
+      </persistent>
+      <attribute
+            name="description">
+      </attribute>
+      </extension>
+      
+      
+       <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+      <type
+            markerType="com.ashling.comrv.marker"
+            name="com.ashling.comrv.marker">
+      </type>
+   </extension>
+   
+      <extension
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationType="com.ashling.comrv.marker"
+            colorPreferenceKey="com.ashling.comrv.color"
+            colorPreferenceValue="192,255,192"
+            highlightPreferenceKey="comrv_highlight"
+            highlightPreferenceValue="true"
+            contributesToHeader="false"
+            includeOnPreferencePage="true"
+            label="ComRV Overlay Marker"
+            overviewRulerPreferenceKey="com.ashling.comrv"
+            textPreferenceKey="com.ashling.comrv"
+            textPreferenceValue="true"
+            textStylePreferenceKey="comrv_stylePreferences"  
+            textStylePreferenceValue="BOX"
+            overviewRulerPreferenceValue="true"
+            verticalRulerPreferenceKey="verticalRulerPreference"
+            verticalRulerPreferenceValue="true"
+            presentationLayer="0"
+            icon="icons/overlayMarker.png"
+            >
+      </specification>
+   </extension>
+
+</plugin>
+
+
