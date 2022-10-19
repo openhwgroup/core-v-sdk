@@ -40,60 +40,46 @@
          id="org.openhwgroup.corev.ide"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.openhwgroup.corev.ide.doc.user"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.openhwgroup.corev.ide.ui.workbench"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.openhwgroup.corev.ide.definition"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.openhwgroup.corev.ide.definition.ui"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.openhwgroup.corev.ide.p2.ui"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.openhwgroup.corev.ide.seal"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.embedcdt.debug.gdbjtag.qemu.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.embedcdt.debug.gdbjtag.qemu.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

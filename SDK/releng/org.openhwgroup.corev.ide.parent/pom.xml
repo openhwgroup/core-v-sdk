@@ -338,6 +338,7 @@
 							<excludes>
 								<plugin id="org.openhwgroup.corev.ide" />
 								<plugin id="org.openhwgroup.corev.ide.toolchains.gnu" />
+								<plugin id="com.ashling.riscfree.debug.jaxb" />
 							</excludes>
 						</configuration>
 					</execution>
