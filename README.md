@@ -131,6 +131,28 @@ Select Window -> Show View -> Other... -> search "Registers"
 
 ![image](https://user-images.githubusercontent.com/69203453/182458391-e45da9f2-981b-417b-82ec-f2cdff7ddd32.png)
 
+## FreeRTOS Task and Queue Views
+
+CORE-V-SDK supports Debugger Task and Queue Views support for FreeRTOS projects.To see the views,
+
+Go to the `OS Awareness` Tab, select "Enable OS Aware Debugging" and choose the "OS" and "Version"
+
+![image](https://user-images.githubusercontent.com/69203453/196983401-c7ee6773-b4fd-4935-bfa2-1aacc84fa06e.png)
+
+To open the view, 
+~~~
+Select Window -> Show View -> Other... -> search "FreeRTOS Task List"
+~~~
+
+or
+
+~~~
+Select Window -> Show View -> Other... -> search "FreeRTOS Queue List"
+~~~
+
+![image](https://user-images.githubusercontent.com/69203453/196985372-12d9c83c-58a6-4923-80fe-b2a11efd7806.png)
+
+
 
 
 
