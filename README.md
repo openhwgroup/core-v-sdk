@@ -116,7 +116,7 @@ Select "Local Terminal"
 
 ## CSR Register View
 
-CORE-V-SDK supports Debugger Register View support for CSR Registers.To see the register view,
+CORE-V-SDK supports a Debugger Register View support for CSR Registers.To see the register view,
 
 Browse the register file from the given location 
 
@@ -133,9 +133,7 @@ Select Window -> Show View -> Other... -> search "Registers"
 
 ## Peripheral Register View
 
-CORE-V-SDK supports Debugger Register View support for Peripheral Registers.To see the register view,
-
-Browse the register file from the given location 
+CORE-V-SDK supports a Debugger Register View for Peripheral Registers. To see the register view set the SVD path as shown below,
 
 `C:\Users\[USER]\AppData\Local\OpenHW\CORE-V-SDKvX.Y.Z\registers\peripheral\CORE-V-MCU-xsvd.svd`
 
