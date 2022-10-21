@@ -131,6 +131,24 @@ Select Window -> Show View -> Other... -> search "Registers"
 
 ![image](https://user-images.githubusercontent.com/69203453/182458391-e45da9f2-981b-417b-82ec-f2cdff7ddd32.png)
 
+## Peripheral Register View
+
+CORE-V-SDK supports Debugger Register View support for Peripheral Registers.To see the register view,
+
+Browse the register file from the given location 
+
+`C:\Users\[USER]\AppData\Local\OpenHW\CORE-V-SDKvX.Y.Z\registers\peripheral\CORE-V-MCU-xsvd.svd`
+
+![image](https://user-images.githubusercontent.com/69203453/197183527-bd0bdb3a-83ab-4323-a06a-410b2b7dcb4e.png)
+
+To open the view, 
+~~~
+Select Window -> Show View -> Other... -> search "Peripherals"
+~~~
+
+![peripherals](https://user-images.githubusercontent.com/69203453/197183973-677546cd-58a4-47ed-a9e7-bd95ed45ffe8.png)
+
+
 ## FreeRTOS Task and Queue Views
 
 CORE-V-SDK supports Debugger Task and Queue Views support for FreeRTOS projects.To see the views,
