@@ -1,4 +1,4 @@
-<img src="https://www.openhwgroup.org/images/openhw-landscape.svg" width="418px" height="103px" /> <img src="https://www.openhwgroup.org/images/core-v-portrait.png" align="right" width="150px" height="120px"/>
+<img src="https://www.openhwgroup.org/images/openhw-landscape.png" width="418px" height="103px" /> <img src="https://www.openhwgroup.org/images/core-v-portrait.png" align="right" width="150px" height="120px"/>
 
 # CORE-V-SDK Quick Start Guide
 The purpose of this Quick Start Guide (QSG) is to get you up and running quickly with the CORE-V-SDK on one of the various supported operating system platforms.
