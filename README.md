@@ -116,7 +116,7 @@ Select "Local Terminal"
 
 ## CSR Register View
 
-CORE-V-SDK supports Debugger Register View support for CSR Registers.To see the register view,
+CORE-V-SDK supports a Debugger Register View support for CSR Registers.To see the register view,
 
 Browse the register file from the given location 
 
@@ -130,6 +130,44 @@ Select Window -> Show View -> Other... -> search "Registers"
 ~~~
 
 ![image](https://user-images.githubusercontent.com/69203453/182458391-e45da9f2-981b-417b-82ec-f2cdff7ddd32.png)
+
+## Peripheral Register View
+
+CORE-V-SDK supports a Debugger Register View for Peripheral Registers. To see the register view set the SVD path as shown below,
+
+`C:\Users\[USER]\AppData\Local\OpenHW\CORE-V-SDKvX.Y.Z\registers\peripheral\CORE-V-MCU-xsvd.svd`
+
+![image](https://user-images.githubusercontent.com/69203453/197183527-bd0bdb3a-83ab-4323-a06a-410b2b7dcb4e.png)
+
+To open the view, 
+~~~
+Select Window -> Show View -> Other... -> search "Peripherals"
+~~~
+
+![peripherals](https://user-images.githubusercontent.com/69203453/197183973-677546cd-58a4-47ed-a9e7-bd95ed45ffe8.png)
+
+
+## FreeRTOS Task and Queue Views
+
+CORE-V-SDK supports Debugger Task and Queue Views support for FreeRTOS projects.To see the views,
+
+Go to the `OS Awareness` Tab, select "Enable OS Aware Debugging" and choose the "OS" and "Version"
+
+![image](https://user-images.githubusercontent.com/69203453/196983401-c7ee6773-b4fd-4935-bfa2-1aacc84fa06e.png)
+
+To open the view, 
+~~~
+Select Window -> Show View -> Other... -> search "FreeRTOS Task List"
+~~~
+
+or
+
+~~~
+Select Window -> Show View -> Other... -> search "FreeRTOS Queue List"
+~~~
+
+![image](https://user-images.githubusercontent.com/69203453/196985372-12d9c83c-58a6-4923-80fe-b2a11efd7806.png)
+
 
 
 
