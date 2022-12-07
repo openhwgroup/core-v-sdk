@@ -114,6 +114,7 @@
       <feature id="org.eclipse.ease.lang.python.py4j.feature" installMode="root"/>
       <feature id="org.eclipse.ease.python.jython.feature" installMode="root"/>
       <feature id="org.eclipse.ease.ui.feature" installMode="root"/>
+      <feature id="org.eclipse.embedcdt.debug.gdbjtag.qemu" installMode="root"/>
    </features>
 
    <configurations>
