@@ -2,11 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %bundle.name
 Bundle-SymbolicName: org.eclipse.embedcdt.debug.gdbjtag.core;singleton:=true
-Bundle-Version: 5.1.0.qualifier
+Bundle-Version: 5.2.0.qualifier
 Bundle-Activator: org.eclipse.embedcdt.internal.debug.gdbjtag.core.Activator
-Require-Bundle: org.eclipse.embedcdt.core;bundle-version="6.2.2",
+Require-Bundle: org.eclipse.embedcdt.core;bundle-version="6.3.1",
  org.eclipse.embedcdt.debug.core;bundle-version="2.0.0",
- org.eclipse.embedcdt.packs.core;bundle-version="3.1.0",
+ org.eclipse.embedcdt.packs.core;bundle-version="3.1.2",
  org.eclipse.cdt.debug.gdbjtag.core;bundle-version="10.0.0",
  org.eclipse.cdt.managedbuilder.core;bundle-version="9.0.0",
  org.eclipse.cdt.core;bundle-version="7.0.0",
@@ -16,7 +16,8 @@ Require-Bundle: org.eclipse.embedcdt.core;bundle-version="6.2.2",
  org.eclipse.cdt.launch;bundle-version="10.0.0",
  org.eclipse.core.runtime;bundle-version="3.19.0",
  org.eclipse.core.variables;bundle-version="3.4.800",
- org.eclipse.debug.core;bundle-version="3.14.600"
+ org.eclipse.debug.core;bundle-version="3.14.600",
+ org.eclipse.jface;bundle-version="3.21.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Vendor: %bundle.vendor
 Bundle-ActivationPolicy: lazy
@@ -32,6 +33,5 @@ Export-Package: org.eclipse.embedcdt.debug.gdbjtag.core,
  org.eclipse.embedcdt.debug.gdbjtag.core.viewmodel.peripheral,
  org.eclipse.embedcdt.internal.debug.gdbjtag.core;x-friends:="org.eclipse.embedcdt.debug.gdbjtag.ui"
 Import-Package: com.ashling.riscfree.debug.opxd.registers.core,
- org.eclipse.embedcdt.packs.core.data.xcdl,
- org.eclipse.jface.preference
+ org.eclipse.embedcdt.packs.core.data.xcdl
 Automatic-Module-Name: org.eclipse.embedcdt.debug.gdbjtag.core

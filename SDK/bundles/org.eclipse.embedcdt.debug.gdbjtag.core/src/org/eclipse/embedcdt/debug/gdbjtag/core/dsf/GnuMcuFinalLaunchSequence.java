@@ -14,7 +14,6 @@
 
 package org.eclipse.embedcdt.debug.gdbjtag.core.dsf;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +24,6 @@ import org.eclipse.cdt.debug.gdbjtag.core.jtagdevice.DefaultGDBJtagDeviceImpl;
 import org.eclipse.cdt.debug.gdbjtag.core.jtagdevice.IGDBJtagDevice;
 import org.eclipse.cdt.dsf.concurrent.RequestMonitor;
 import org.eclipse.cdt.dsf.concurrent.RequestMonitorWithProgress;
-import org.eclipse.cdt.dsf.debug.service.IRegisters;
 import org.eclipse.cdt.dsf.gdb.launching.GdbLaunch;
 import org.eclipse.cdt.dsf.gdb.service.IGDBBackend;
 import org.eclipse.cdt.dsf.gdb.service.command.IGDBControl;
@@ -43,6 +41,8 @@ import org.eclipse.embedcdt.debug.gdbjtag.core.services.IPeripheralsService;
 import org.eclipse.embedcdt.internal.debug.gdbjtag.core.Activator;
 
 import com.ashling.riscfree.debug.opxd.registers.core.RiscFreeRegister;
+import org.eclipse.cdt.dsf.debug.service.IRegisters;
+import java.io.File;
 
 public class GnuMcuFinalLaunchSequence extends GDBJtagDSFFinalLaunchSequence {
 
@@ -393,6 +393,18 @@ public class GnuMcuFinalLaunchSequence extends GDBJtagDSFFinalLaunchSequence {
 		queueCommands(commandsList, rm);
 	}
 
+	// ------------------------------------------------------------------------
+
+	@Override
+	@Execute
+	public void stepStartTrackingBreakpoints(final RequestMonitor rm) {
+		if (fMode.equals(ILaunchManager.DEBUG_MODE)) {
+			super.stepStartTrackingBreakpoints(rm);
+		} else {
+			rm.done();
+		}
+	}
+
 	/*
 	 * This step will add the register description file which is chosen from the from the Debugger tab
 	 */
@@ -431,18 +443,6 @@ public class GnuMcuFinalLaunchSequence extends GDBJtagDSFFinalLaunchSequence {
 			}
 		});
 
-	}
-
-	// ------------------------------------------------------------------------
-
-	@Override
-	@Execute
-	public void stepStartTrackingBreakpoints(final RequestMonitor rm) {
-		if (fMode.equals(ILaunchManager.DEBUG_MODE)) {
-			super.stepStartTrackingBreakpoints(rm);
-		} else {
-			rm.done();
-		}
 	}
 
 	// ------------------------------------------------------------------------
