@@ -19,4 +19,4 @@ Export-Package: com.sun.activation.registries,
  jakarta.xml.bind.annotation.adapters
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: test.jars
-Bundle-Vendor: Ashling
+Bundle-Vendor: OpenHW Group
