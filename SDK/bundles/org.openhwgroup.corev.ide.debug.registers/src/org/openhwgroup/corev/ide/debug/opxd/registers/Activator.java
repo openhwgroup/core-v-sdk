@@ -12,7 +12,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.ashling.riscfree.dsf.registers"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "org.openhwgroup.corev.dsf.registers"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
