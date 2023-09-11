@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: RiscFree XML Parsing Support
-Bundle-SymbolicName: com.ashling.riscfree.debug.jaxb
+Bundle-SymbolicName: org.openhwgroup.corev.ide.debug.jaxb
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: jakarta.activation.jar,
  jakarta.xml.bind-api.jar,
