@@ -575,8 +575,8 @@ public class TabDebugger extends AbstractLaunchConfigurationTab {
 
 		{
 			Label label = new Label(comp, SWT.NONE);
-			label.setText(Messages.getString("DebuggerTab.gdbRegisterFile"));
-			label.setToolTipText(Messages.getString("DebuggerTab.gdbRegisterFile_ToolTipText"));
+			label.setText(Messages.DebuggerTab_gdbRegisterFile);
+			label.setToolTipText(Messages.DebuggerTab_gdbRegisterFile_ToolTipText);
 
 			Composite local = new Composite(comp, SWT.NONE);
 			GridLayout layout = new GridLayout();
@@ -592,9 +592,9 @@ public class TabDebugger extends AbstractLaunchConfigurationTab {
 				gd = new GridData(GridData.FILL_HORIZONTAL);
 				registerFile.setLayoutData(gd);
 				registerFileBrowseButton = new Button(local, SWT.NONE);
-				registerFileBrowseButton.setText(Messages.getString("DebuggerTab.gdbRegisterFile_Browse"));
+				registerFileBrowseButton.setText(Messages.DebuggerTab_gdbRegisterFile_Browse);
 				registerFileVariableButton = new Button(local, SWT.NONE);
-				registerFileVariableButton.setText(Messages.getString("DebuggerTab.gdbRegisterFileVariable"));
+				registerFileVariableButton.setText(Messages.DebuggerTab_gdbRegisterFileVariable);
 
 			}
 		}
@@ -659,7 +659,7 @@ public class TabDebugger extends AbstractLaunchConfigurationTab {
 		registerFileBrowseButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				browseButtonSelected(Messages.getString("DebuggerTab.gdbRegisterFile_Title"), registerFile);
+				browseButtonSelected(Messages.DebuggerTab_gdbRegisterFile_Title, registerFile);
 			}
 		});
 

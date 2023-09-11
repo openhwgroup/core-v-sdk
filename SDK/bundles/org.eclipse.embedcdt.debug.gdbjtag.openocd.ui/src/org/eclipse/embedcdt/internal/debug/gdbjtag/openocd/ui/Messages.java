@@ -74,6 +74,11 @@ public class Messages {
 	public static String DebuggerTab_restoreDefaults_ToolTipText;
 	public static String DebuggerTab_update_thread_list_on_suspend_Text;
 	public static String DebuggerTab_update_thread_list_on_suspend_ToolTipText;
+	public static String DebuggerTab_gdbRegisterFile;
+	public static String DebuggerTab_gdbRegisterFile_ToolTipText;
+	public static String DebuggerTab_gdbRegisterFile_Browse;
+	public static String DebuggerTab_gdbRegisterFileVariable;
+	public static String DebuggerTab_gdbRegisterFile_Title;
 	public static String GDBJtagDebuggerTab_commandFactoryLabel;
 	public static String GDBJtagDebuggerTab_connectionLabel;
 	public static String GDBJtagDebuggerTab_gdbCommandBrowse_Title;
