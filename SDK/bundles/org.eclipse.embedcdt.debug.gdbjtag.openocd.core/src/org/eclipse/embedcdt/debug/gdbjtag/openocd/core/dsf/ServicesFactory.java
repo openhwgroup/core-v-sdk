@@ -28,8 +28,7 @@ import org.eclipse.embedcdt.debug.gdbjtag.core.dsf.GnuMcuGdbServerBackend;
 import org.eclipse.embedcdt.debug.gdbjtag.core.dsf.GnuMcuServicesFactory;
 import org.eclipse.embedcdt.debug.gdbjtag.openocd.core.ConfigurationAttributes;
 import org.eclipse.embedcdt.internal.debug.gdbjtag.openocd.core.Activator;
-
-import com.ashling.riscfree.debug.opxd.registers.core.RiscFreeRegister;
+import org.openhwgroup.corev.ide.debug.registers.core.RiscFreeRegister;
 
 public class ServicesFactory extends GnuMcuServicesFactory {
 

@@ -32,7 +32,7 @@ Export-Package: org.eclipse.embedcdt.debug.gdbjtag.core,
  org.eclipse.embedcdt.debug.gdbjtag.core.services,
  org.eclipse.embedcdt.debug.gdbjtag.core.viewmodel.peripheral,
  org.eclipse.embedcdt.internal.debug.gdbjtag.core;x-friends:="org.eclipse.embedcdt.debug.gdbjtag.ui"
-Import-Package: com.ashling.riscfree.debug.opxd.registers.core,
- org.eclipse.embedcdt.packs.core.data.xcdl,
- org.eclipse.jface.preference
+Import-Package: org.eclipse.embedcdt.packs.core.data.xcdl,
+ org.eclipse.jface.preference,
+ org.openhwgroup.corev.ide.debug.registers.core
 Automatic-Module-Name: org.eclipse.embedcdt.debug.gdbjtag.core

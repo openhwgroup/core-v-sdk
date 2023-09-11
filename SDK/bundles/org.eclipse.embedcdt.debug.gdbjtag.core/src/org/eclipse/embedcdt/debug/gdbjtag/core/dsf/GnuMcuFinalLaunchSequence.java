@@ -41,8 +41,7 @@ import org.eclipse.embedcdt.debug.gdbjtag.core.services.IGnuMcuDebuggerCommandsS
 import org.eclipse.embedcdt.debug.gdbjtag.core.services.IPeripheralMemoryService;
 import org.eclipse.embedcdt.debug.gdbjtag.core.services.IPeripheralsService;
 import org.eclipse.embedcdt.internal.debug.gdbjtag.core.Activator;
-
-import com.ashling.riscfree.debug.opxd.registers.core.RiscFreeRegister;
+import org.openhwgroup.corev.ide.debug.registers.core.RiscFreeRegister;
 
 public class GnuMcuFinalLaunchSequence extends GDBJtagDSFFinalLaunchSequence {
 
