@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
-Bundle-SymbolicName: com.ashling.riscfree.debug.opxd.core;singleton:=true
+Bundle-SymbolicName: org.openhwgroup.corev.ide.debug.core;singleton:=true
 Bundle-Version: 1.5.0.qualifier
 Bundle-Activator: com.ashling.riscfree.debug.opxd.core.Activator
 Bundle-Vendor: %Bundle-Vendor
@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.debug.core,
  org.eclipse.cdt.dsf.gdb,
  org.eclipse.cdt.debug.gdbjtag.core,
- com.ashling.riscfree.debug.opxd.emf,
+ org.openhwgroup.corev.ide.debug.emf,
  org.eclipse.cdt.debug.core,
  org.eclipse.embedcdt.core,
  org.eclipse.ui.workbench,

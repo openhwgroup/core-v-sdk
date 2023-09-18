@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.debug.ui,
  org.eclipse.ui.workbench.texteditor,
  org.openhwgroup.corev.ide.debug.multicore;bundle-version="1.0.0",
- com.ashling.riscfree.debug.opxd.emf,
+ org.openhwgroup.corev.ide.debug.emf,
  org.eclipse.cdt.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: com.ashling.riscfree.debug.ease.module
