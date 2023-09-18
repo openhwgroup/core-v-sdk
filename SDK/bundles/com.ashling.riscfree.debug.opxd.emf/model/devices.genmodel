@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.ashling.riscfree.debug.opxd.emf/src" modelPluginID="com.ashling.riscfree.debug.opxd.emf"
+    modelName="Devices" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.xsd.ecore.importer" complianceLevel="5.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <genAnnotations source="http://www.eclipse.org/emf/2002/GenModel/importer/org.eclipse.xsd.ecore.importer">
+    <details key="createMap" value="true"/>
+  </genAnnotations>
+  <foreignModel>file:/C:/Users/Ashling/Downloads/devices.xsd</foreignModel>
+  <genPackages prefix="Devices" resource="XML" disposableProviderFactory="true" ecorePackage="Devices.ecore#/">
+    <genClasses ecoreClass="Devices.ecore#//ARCEmulatorType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//ARCEmulatorType/targetVoltage"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//AshlingProcessorDataBaseType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//AshlingProcessorDataBaseType/processor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//AshlingProcessorDataBaseType/date"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//AshlingProcessorDataBaseType/family"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//AshlingProcessorDataBaseType/subSet"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//AshlingProcessorDataBaseType/version"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//CoreInfoType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//CoreInfoType/core"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//CoreType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//CoreType/dAP"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//CoreType/tap"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//CoreType/vJTAG"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//CoreType/debugBaseAddress"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//CoreType/memory"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//CoreType/gDBRegFile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//CoreType/architecture"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//CoreType/family"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//CoreType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//CoreType/number"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//DAPType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//DAPType/jTAGDP"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//DAPType/sWDDP"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//DAPType/debugBaseAddress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//DAPType/cTIBaseAddress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//DAPType/pTMBaseAddress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//DAPType/eTMBaseAddress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//DAPType/funnelPortIndex"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//DAPType/debugApIndex"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//DAPType/debugPulpNPCAddr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//DAPType/debugTransport"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//DAPType/memoryApIndex"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//DAPType/jtagApIndex"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//DAPType/useMemApForMemAccess"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//DebuggerControlType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//DebuggerControlType/maxJtagFrequencyKhz"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Devices.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Devices.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//DocumentRoot/ashlingProcessorDataBase"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//JTAGDPType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//JTAGDPType/refid"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//JTAGScanChainType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//JTAGScanChainType/tap"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//MDMAPType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//MDMAPType/baseAddress"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//MemAreaType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//MemAreaType/access"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//MemAreaType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//MemAreaType/size"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//MemAreaType/start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//MemAreaType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//MemoryType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//MemoryType/memArea"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//ProcessorType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/cSFunnelBaseAddress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/cSETFBaseAddress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/cSETRBaseAddress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/cSTPIUBaseAddress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/cSSTMBaseAddress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/cSSTMFunnelPortIndex"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/cSTSBaseAddress"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/internalName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/deviceType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/coresightCompliant"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/resetType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//ProcessorType/debuggerControl"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//ProcessorType/aRCEmulator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/instructionToSelectADI"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//ProcessorType/mDMAP"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/escapeSequenceType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//ProcessorType/jTAGScanChain"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Devices.ecore#//ProcessorType/coreInfo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/multiCoreSupported"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/useNonStopMode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/defaultTAP"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//ProcessorType/device"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//TapType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//TapType/refid"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//TapType1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//TapType1/iRlength"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//TapType1/bypassInst"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//TapType1/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//TapType1/number"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//TargetVoltageType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//TargetVoltageType/supplyType"/>
+    </genClasses>
+    <genClasses ecoreClass="Devices.ecore#//VJTAGType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Devices.ecore#//VJTAGType/nodeIndex"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

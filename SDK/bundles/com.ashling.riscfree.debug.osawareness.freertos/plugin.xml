@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.ashling.riscfree.debug.osawareness.OSInfoProvider">
+         <osinfo name="FreeRTOS" versions="resources/versions.csv">
+      	 </osinfo>	
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="com.ashling.riscfree.debug.osawareness.freertos.category"
+            name="FreeRTOS">
+      </category>
+      <view
+            category="com.ashling.riscfree.debug.osawareness.freertos.category"
+            class="com.ashling.riscfree.debug.osawareness.freertos.view.OSAwareFreeRTOSDebugView"
+            icon="icons/task-list.gif"
+            id="com.ashling.riscfree.debug.osawareness.freertos.tasklist"
+            name="FreeRTOS Task List"
+            restorable="true">
+      </view>
+      <view
+            category="com.ashling.riscfree.debug.osawareness.freertos.category"
+            class="com.ashling.riscfree.debug.osawareness.freertos.view.OSAwareFreeRTOSDebugView"
+            icon="icons/task-list.gif"
+            id="com.ashling.riscfree.debug.osawareness.freertos.eventlist"
+            name="FreeRTOS Queue List"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.debug.ui.DebugPerspective">
+         <view
+               id="com.ashling.riscfree.debug.osawareness.freertos.tasklist"
+               ratio="0.6"
+               relationship="right"
+               relative="org.eclipse.ui.console.ConsoleView"
+               visible="false">
+         </view>
+         <view
+               id="com.ashling.riscfree.debug.osawareness.freertos.eventlist"
+               relationship="stack"
+               relative="org.eclipse.buildship.ui.views.taskview"
+               visible="false">
+         </view>
+      </perspectiveExtension>
+   </extension>
+</plugin>

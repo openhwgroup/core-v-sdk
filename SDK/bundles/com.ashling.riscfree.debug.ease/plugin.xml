@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ease.modules">
+      <category
+            id="com.ashling.riscfree.debug.ease.module.debug"
+            name="RiscFree">
+      </category>
+      <module
+            category="com.ashling.riscfree.debug.ease.module.debug"
+            class="com.ashling.riscfree.debug.ease.module.GDBModule"
+            id="com.ashling.riscfree.debug.ease.module.gdbdebugging"
+            name="GDB Debugging"
+            visible="true">
+      </module>
+   </extension>
+
+</plugin>

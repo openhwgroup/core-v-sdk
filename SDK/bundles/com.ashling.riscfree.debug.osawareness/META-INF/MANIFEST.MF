@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: RiscFree OS Aware Debugging
+Bundle-SymbolicName: com.ashling.riscfree.debug.osawareness;singleton:=true
+Bundle-Version: 2.1.0.qualifier
+Bundle-Activator: com.ashling.riscfree.debug.osawareness.Activator
+Bundle-Vendor: Ashling
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.debug.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: com.ashling.riscfree.debug.osawareness
+Bundle-ActivationPolicy: lazy
+Bundle-Localization: plugin
+Export-Package: com.ashling.riscfree.debug.awareness.util

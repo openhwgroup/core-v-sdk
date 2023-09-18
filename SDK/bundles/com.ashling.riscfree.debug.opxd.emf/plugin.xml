@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated devices -->
+      <package
+            uri="file:/C:/PK/devices.xsd"
+            class="com.ashling.riscfree.debug.opxd.emf.devices.devicesPackage"
+            genModel="model/devices.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated devices -->
+      <parser
+            type="devices"
+            class="com.ashling.riscfree.debug.opxd.emf.devices.util.devicesResourceFactoryImpl"/>
+   </extension>
+
+</plugin>

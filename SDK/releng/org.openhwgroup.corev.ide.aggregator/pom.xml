@@ -52,6 +52,22 @@
 		<module>..\..\bundles\com.ashling.riscfree.debug.jaxb</module>
 		<module>..\..\bundles\com.ashling.riscfree.debug.opxd.registers</module>
 		
+		<module>..\..\bundles\com.ashling.riscfree.debug.ease</module>
+		<module>..\..\bundles\com.ashling.riscfree.debug.multicore</module>
+		<module>..\..\bundles\com.ashling.riscfree.debug.opxd.core</module>
+		<module>..\..\bundles\com.ashling.riscfree.debug.osawareness</module>
+		<module>..\..\bundles\com.ashling.riscfree.debug.osawareness.freertos</module>
+		<module>..\..\bundles\com.ashling.riscfree.debug.osawareness.linux</module>
+		<module>..\..\bundles\com.ashling.riscfree.debug.osawareness.ui</module>
+		<module>..\..\bundles\com.ashling.riscfree.globalvariable.view</module>
+		<module>..\..\bundles\com.ashling.riscfree.debug.opxd.emf</module>
+		<module>..\..\bundles\org.eclipse.cdt.dsf.gdb</module>
+		<module>..\..\features\org.eclipse.cdt.gnu.dsf-feature</module>
+		<module>..\..\features\org.eclipse.cdt-feature</module>
+		
+		
+
+		
 
 	</modules>
 

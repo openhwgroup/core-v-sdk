@@ -72,6 +72,48 @@
       <feature id="org.eclipse.tm.terminal.connector.telnet.feature" installMode="root"/>
       <feature id="org.eclipse.tm.terminal.feature" installMode="root"/>
       <feature id="org.eclipse.egit" installMode="root"/>
+      <feature id="org.eclipse.help" installMode="root"/>
+      <feature id="org.eclipse.embedcdt.debug.gdbjtag" installMode="root"/>
+      <feature id="org.eclipse.cdt.gnu.build" installMode="root"/>
+      <feature id="org.eclipse.equinox.p2.core.feature" installMode="root"/>
+      <feature id="org.eclipse.ecf.core.ssl.feature" installMode="root"/>
+      <feature id="org.eclipse.ecf.filetransfer.ssl.feature" installMode="root"/>
+      <feature id="org.eclipse.cdt.platform" installMode="root"/>
+      <feature id="org.eclipse.jgit.http.apache" installMode="root"/>
+      <feature id="org.eclipse.passage.lic.json.feature" installMode="root"/>
+      <feature id="org.eclipse.rcp" installMode="root"/>
+      <feature id="org.eclipse.passage.lic.licenses.feature" installMode="root"/>
+      <feature id="org.eclipse.equinox.p2.rcp.feature" installMode="root"/>
+      <feature id="org.eclipse.ecf.filetransfer.feature" installMode="root"/>
+      <feature id="org.eclipse.jgit.gpg.bc" installMode="root"/>
+      <feature id="org.eclipse.passage.lic.net.feature" installMode="root"/>
+      <feature id="org.eclipse.cdt.gdb" installMode="root"/>
+      <feature id="org.eclipse.embedcdt" installMode="root"/>
+      <feature id="org.eclipse.ecf.filetransfer.httpclient5.feature" installMode="root"/>
+      <feature id="org.eclipse.passage.lic.oshi.feature" installMode="root"/>
+      <feature id="org.eclipse.cdt.gnu.dsf" installMode="root"/>
+      <feature id="org.eclipse.passage.lic.bc.feature" installMode="root"/>
+      <feature id="org.eclipse.jgit.ssh.apache" installMode="root"/>
+      <feature id="org.eclipse.emf.common" installMode="root"/>
+      <feature id="org.eclipse.passage.lic.emf.feature" installMode="root"/>
+      <feature id="org.eclipse.emf.ecore" installMode="root"/>
+      <feature id="org.eclipse.equinox.p2.user.ui" installMode="root"/>
+      <feature id="org.eclipse.passage.lic.equinox.feature" installMode="root"/>
+      <feature id="org.eclipse.passage.lic.e4.ui.feature" installMode="root"/>
+      <feature id="org.eclipse.equinox.p2.extras.feature" installMode="root"/>
+      <feature id="org.eclipse.ecf.core.feature" installMode="root"/>
+      <feature id="org.eclipse.jgit" installMode="root"/>
+      <feature id="org.eclipse.passage.lic.compile.feature" installMode="root"/>
+      <feature id="org.eclipse.cdt.native" installMode="root"/>
+      <feature id="org.eclipse.cdt.gnu.debug" installMode="root"/>
+      <feature id="org.eclipse.e4.rcp" installMode="root"/>
+      <feature id="org.eclipse.passage.lic.hc.feature" installMode="root"/>
+      <feature id="org.eclipse.ease.engine.jython.feature" installMode="root"/>
+      <feature id="org.eclipse.ease.feature" installMode="root"/>
+      <feature id="org.eclipse.ease.lang.python.feature" installMode="root"/>
+      <feature id="org.eclipse.ease.lang.python.py4j.feature" installMode="root"/>
+      <feature id="org.eclipse.ease.python.jython.feature" installMode="root"/>
+      <feature id="org.eclipse.ease.ui.feature" installMode="root"/>
       <feature id="org.eclipse.embedcdt.debug.gdbjtag.qemu" installMode="root"/>
    </features>
 

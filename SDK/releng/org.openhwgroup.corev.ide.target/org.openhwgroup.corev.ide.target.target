@@ -63,5 +63,25 @@
 			<repository location="https://download.eclipse.org/releases/latest"/>
 			<unit id="org.eclipse.egit.feature.group" version="0.0.0"/>
 		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+			<repository location="http://eclipse.py4j.org/"/>
+			<unit id="org.py4j.feature.feature.group" version="0.0.0"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+			<unit id="org.eclipse.ease.engine.jython.feature.feature.group" version="0.0.0"/>
+			<repository id="ease-engines" location="https://eclipse-ease-addons.github.io/org.eclipse.ease.engines.p2/latest/"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+			<repository location="https://eclipse-ease-addons.github.io/org.eclipse.ease.engines.p2/latest/"/>
+			<unit id="org.eclipse.ease.engine.jython.feature.feature.group" version="0.0.0"/>
+		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<repository location="https://download.eclipse.org/ease/release/0.8.0/"/>
+		<unit id="org.eclipse.ease.feature.feature.group" version="0.8.0.I202105061131"/>
+		<unit id="org.eclipse.ease.lang.python.feature.feature.group" version="0.8.0.I202104091425"/>
+		<unit id="org.eclipse.ease.python.jython.feature.feature.group" version="0.8.0.I202104061519"/>
+		<unit id="org.eclipse.ease.lang.python.py4j.feature.feature.group" version="0.8.0.I202104091518"/>
+		<unit id="org.eclipse.ease.ui.feature.feature.group" version="0.8.0.I202105111204"/>
+	</location>
 	</locations>
 </target>
