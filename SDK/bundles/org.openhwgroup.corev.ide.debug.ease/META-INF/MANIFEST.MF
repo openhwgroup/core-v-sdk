@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: RiscFree GDB Module
-Bundle-SymbolicName: com.ashling.riscfree.debug.ease;singleton:=true
+Bundle-SymbolicName: org.openhwgroup.corev.ide.debug.ease;singleton:=true
 Bundle-Version: 3.0.1.qualifier
 Bundle-Activator: com.ashling.riscfree.debug.ease.Activator
 Bundle-Vendor: Ashling
@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.cdt.dsf.gdb,
  org.eclipse.debug.ui,
  org.eclipse.ui.workbench.texteditor,
- com.ashling.riscfree.debug.multicore;bundle-version="1.0.0",
+ org.openhwgroup.corev.ide.debug.multicore;bundle-version="1.0.0",
  com.ashling.riscfree.debug.opxd.emf,
  org.eclipse.cdt.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

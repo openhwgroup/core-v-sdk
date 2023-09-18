@@ -19,7 +19,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.cdt.native.serial;bundle-version="1.1.100",
  org.eclipse.debug.ui,
  org.eclipse.swt,
- com.ashling.riscfree.debug.multicore;bundle-version="1.0.0"
+ org.openhwgroup.corev.ide.debug.multicore;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: org.eclipse.cdt.dsf.gdb,

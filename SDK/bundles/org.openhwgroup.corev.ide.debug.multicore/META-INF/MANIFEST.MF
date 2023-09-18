@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: com.ashling.riscfree.debug.multicore
+Bundle-SymbolicName: org.openhwgroup.corev.ide.debug.multicore
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.ashling.riscfree.debug.multicore.Activator
 Bundle-Vendor: %Bundle-Vendor
