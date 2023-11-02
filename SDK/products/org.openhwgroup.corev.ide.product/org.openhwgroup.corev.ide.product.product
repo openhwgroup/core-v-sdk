@@ -115,6 +115,9 @@
       <feature id="org.eclipse.ease.python.jython.feature" installMode="root"/>
       <feature id="org.eclipse.ease.ui.feature" installMode="root"/>
       <feature id="org.eclipse.embedcdt.debug.gdbjtag.qemu" installMode="root"/>
+      <feature id="org.openhwgroup.corev.ide.feature" installMode="root"/>
+      <feature id="org.openhwgroup.corev.ide.cdt.feature" installMode="root"/>
+      <feature id="org.openhwgroup.corev.ide.toolchains.gnu.feature" installMode="root"/>
    </features>
 
    <configurations>

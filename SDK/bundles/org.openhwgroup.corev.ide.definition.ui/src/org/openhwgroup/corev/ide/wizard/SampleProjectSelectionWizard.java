@@ -52,6 +52,7 @@ import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.ui.internal.wizards.datatransfer.TarEntry;
 import org.eclipse.ui.internal.wizards.datatransfer.TarException;
 import org.eclipse.ui.internal.wizards.datatransfer.TarFile;
@@ -110,7 +111,7 @@ public class SampleProjectSelectionWizard extends WizardPage {
 		viewer = filterTree.getViewer();
 		viewer.setContentProvider(new ViewContentProvider());
 		viewer.setLabelProvider(new ViewLabelProvider());
-		exampleProjectNodePathDefault = resolvePath("${eclipse_home}/../"); //$NON-NLS-1$
+		exampleProjectNodePathDefault = resolvePath("${eclipse_home}/../examples"); //$NON-NLS-1$
 		viewer.setInput(new FolderNode(new File(exampleProjectNodePathDefault)));
 
 		viewer.expandAll();
@@ -177,16 +178,29 @@ public class SampleProjectSelectionWizard extends WizardPage {
 		this.viewer = viewer;
 	}
 
+	
 	public void performFinish() {
 
 		fetchProjectPathFromTreeNodeSelection(tree.getItem(0), tree.getItem(0).getText());
 		List<IProject> projectsNotCopied = new ArrayList<>();
 		List<String> invalidFileSelected = new ArrayList<>();
-
+		File file;
+		boolean isFreeRTOSProject =false;
 		for (String projectPath : selectedProjectFromTree) {
-
+			file=new File(projectPath);
+			String parentFolder=file.getParentFile().getName();
+			if(parentFolder.equalsIgnoreCase("FreeRTOS")) { //$NON-NLS-1$
+				isFreeRTOSProject=true;
+				break;
+			}
+		}
+		
+		if(isFreeRTOSProject) {
+			selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/FreeRTOS-Kernel.zip")); //$NON-NLS-1$
+			selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/common-io.zip")); //$NON-NLS-1$
+		}
+		for (String projectPath : selectedProjectFromTree) {
 			List<IProject> createdProjects = new ArrayList<>();
-
 			try {
 				getContainer().run(true, true, monitor -> {
 
@@ -212,6 +226,7 @@ public class SampleProjectSelectionWizard extends WizardPage {
 
 					if (selectedProjects.length >= 1) {
 
+
 						// import from file system
 						File importSource = null;
 						ProjectRecord record = selectedProjects[0];// Assuming single record/project in the project zip
@@ -222,6 +237,9 @@ public class SampleProjectSelectionWizard extends WizardPage {
 						IProject[] existingProjects = workspace.getRoot().getProjects();
 						for (IProject existingProject : existingProjects) {
 							if (Objects.equals(projectName, existingProject.getName())) {
+								if(projectName.equals("common-io") || projectName.equals("FreeRTOS-Kernel")) {//$NON-NLS-1$//$NON-NLS-2$
+								continue;
+								}
 								isProjectExists = true;
 								projectsNotCopied.add(existingProject);
 							}
