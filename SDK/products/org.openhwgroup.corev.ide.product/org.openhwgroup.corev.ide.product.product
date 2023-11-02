@@ -13,7 +13,7 @@
 	Contributors:
 		Alexander Fedorov (ArSysOp) - initial API and implementation
 -->
-<product name="CORE-V-SDK" uid="org.openhwgroup.corev.ide.product" id="org.openhwgroup.corev.ide.product" application="org.eclipse.ui.ide.workbench" version="0.0.0.3" useFeatures="true" includeLaunchers="true">
+<product name="CORE-V-SDK" uid="org.openhwgroup.corev.ide.product" id="org.openhwgroup.corev.ide.product" application="org.eclipse.ui.ide.workbench" version="0.0.0.5" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
