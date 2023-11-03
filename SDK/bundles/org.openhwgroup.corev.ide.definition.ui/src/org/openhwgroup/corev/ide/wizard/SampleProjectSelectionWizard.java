@@ -211,6 +211,10 @@ public class SampleProjectSelectionWizard extends WizardPage {
 			selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/shared.zip")); //$NON-NLS-1$
 		}
 		for (String projectPath : selectedProjectFromTree) {
+			if(projectPath.contains("shared.zip")) {  //$NON-NLS-1$
+				extractZip(projectPath,ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString());
+				continue;
+			}
 			List<IProject> createdProjects = new ArrayList<>();
 			try {
 				getContainer().run(true, true, monitor -> {
@@ -223,10 +227,6 @@ public class SampleProjectSelectionWizard extends WizardPage {
 					} else if (ArchiveFileManipulations.isZipFile(projectPath)) {
 						ZipFile sourceFile = getSpecifiedZipSourceFile(projectPath);
 						structureProvider = new ZipLeveledStructureProvider(sourceFile);
-					}
-					
-					if(projectPath.contains("shared.zip")) {  //$NON-NLS-1$
-						extractZip(projectPath,ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString());
 					}
 					Object child = structureProvider.getRoot();
 
