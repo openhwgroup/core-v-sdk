@@ -1,12 +1,17 @@
 package org.openhwgroup.corev.ide.wizard;
 
+import java.io.BufferedInputStream;
+
 /*
  *Contributors:Promodkumar (Ashling) - initial implementation
  */
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.util.ArrayList;
@@ -14,9 +19,13 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
@@ -56,6 +65,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.ui.internal.wizards.datatransfer.TarEntry;
 import org.eclipse.ui.internal.wizards.datatransfer.TarException;
 import org.eclipse.ui.internal.wizards.datatransfer.TarFile;
+import org.eclipse.ui.internal.wizards.datatransfer.TarInputStream;
 import org.eclipse.ui.internal.wizards.datatransfer.TarLeveledStructureProvider;
 import org.eclipse.ui.internal.wizards.datatransfer.ZipLeveledStructureProvider;
 import org.eclipse.core.resources.IProjectDescription;
@@ -198,6 +208,7 @@ public class SampleProjectSelectionWizard extends WizardPage {
 		if(isFreeRTOSProject) {
 			selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/FreeRTOS-Kernel.zip")); //$NON-NLS-1$
 			selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/common-io.zip")); //$NON-NLS-1$
+			selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/shared.zip")); //$NON-NLS-1$
 		}
 		for (String projectPath : selectedProjectFromTree) {
 			List<IProject> createdProjects = new ArrayList<>();
@@ -212,6 +223,10 @@ public class SampleProjectSelectionWizard extends WizardPage {
 					} else if (ArchiveFileManipulations.isZipFile(projectPath)) {
 						ZipFile sourceFile = getSpecifiedZipSourceFile(projectPath);
 						structureProvider = new ZipLeveledStructureProvider(sourceFile);
+					}
+					
+					if(projectPath.contains("shared.zip")) {  //$NON-NLS-1$
+						extractZip(projectPath,ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString());
 					}
 					Object child = structureProvider.getRoot();
 
@@ -455,6 +470,43 @@ public class SampleProjectSelectionWizard extends WizardPage {
 		}
 		return value;
 	}
+	
+	 public void extractZip(String sourceFilePath, String destinationFolder) {
+	        try (ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(sourceFilePath))) {
+	            extractFromZipStream(zipInputStream, destinationFolder);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    public void extractFromZipStream(ZipInputStream zipInputStream, String destinationFolder) {
+	        try {
+	            ZipEntry zipEntry;
+	            while ((zipEntry = zipInputStream.getNextEntry()) != null) {
+	                File outputFile = new File(destinationFolder, zipEntry.getName());
+
+	                if (zipEntry.isDirectory()) {
+	                    outputFile.mkdirs();
+	                } else {
+	                    File parent = outputFile.getParentFile();
+	                    if (!parent.exists()) {
+	                        parent.mkdirs();
+	                    }
+
+	                    try (OutputStream output = new FileOutputStream(outputFile)) {
+	                        byte[] buffer = new byte[1024];
+	                        int bytesRead;
+	                        while ((bytesRead = zipInputStream.read(buffer)) != -1) {
+	                            output.write(buffer, 0, bytesRead);
+	                        }
+	                    }
+	                }
+	                zipInputStream.closeEntry();
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
 
 	public class ProjectRecord {
 		private File projectSystemFile;
