@@ -59,6 +59,7 @@ import org.eclipse.ui.internal.wizards.datatransfer.ILeveledImportStructureProvi
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.internal.registry.osgi.OSGIUtils;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -72,6 +73,8 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.ui.wizards.datatransfer.FileSystemStructureProvider;
+import com.ashling.riscfree.debug.opxd.core.utils.OSUtil;
+import com.ashling.riscfree.debug.opxd.core.utils.OSUtil.OS;
 
 
 public class SampleProjectSelectionWizard extends WizardPage {
@@ -206,13 +209,23 @@ public class SampleProjectSelectionWizard extends WizardPage {
 		}
 		
 		if(isFreeRTOSProject) {
+			if(OSUtil.getOS()== OS.WINDOWS) {
 			selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/FreeRTOS-Kernel.zip")); //$NON-NLS-1$
 			selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/common-io.zip")); //$NON-NLS-1$
 			selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/shared.zip")); //$NON-NLS-1$
+			}else if(OSUtil.getOS()== OS.WINDOWS) {
+				selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/FreeRTOS-Kernel.tar.gz")); //$NON-NLS-1$
+				selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/common-io.tar.gz")); //$NON-NLS-1$
+				selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/shared.tar.gz")); //$NON-NLS-1$
+				
+			}
 		}
 		for (String projectPath : selectedProjectFromTree) {
-			if(projectPath.contains("shared.zip")) {  //$NON-NLS-1$
+			if(projectPath.contains("shared.zip")) {  //$NON-NLS-1$ 
 				extractZip(projectPath,ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString());
+				continue;
+			}else if(projectPath.contains("shared.tar.gz")) { //$NON-NLS-1$
+				extractTarGz(projectPath,ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString());
 				continue;
 			}
 			List<IProject> createdProjects = new ArrayList<>();
@@ -504,6 +517,46 @@ public class SampleProjectSelectionWizard extends WizardPage {
 	                zipInputStream.closeEntry();
 	            }
 	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    public static void extractTarGz(String sourceFilePath, String destinationFolder) {
+	        try (FileInputStream fileStream = new FileInputStream(sourceFilePath);
+	             GZIPInputStream gzipStream = new GZIPInputStream(fileStream);
+	             BufferedInputStream bufferedStream = new BufferedInputStream(gzipStream);
+	             TarInputStream tarInputStream = new TarInputStream(bufferedStream)) {
+
+	            extractFromTarStream(tarInputStream, destinationFolder);
+
+	        } catch (IOException | TarException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    public static void extractFromTarStream(TarInputStream tarInputStream, String destinationFolder) {
+	        try {
+	            TarEntry entry;
+	            while ((entry = tarInputStream.getNextEntry()) != null) {
+	                if (entry.getName().endsWith(File.separator)) {
+	                    new File(destinationFolder, entry.getName()).mkdirs();
+	                } else {
+	                    File outputFile = new File(destinationFolder, entry.getName());
+	                    File parent = outputFile.getParentFile();
+	                    if (!parent.exists()) {
+	                        parent.mkdirs();
+	                    }
+
+	                    try (OutputStream output = new FileOutputStream(outputFile)) {
+	                        byte[] buffer = new byte[1024];
+	                        int bytesRead;
+	                        while ((bytesRead = tarInputStream.read(buffer)) != -1) {
+	                            output.write(buffer, 0, bytesRead);
+	                        }
+	                    }
+	                }
+	            }
+	        } catch (IOException | TarException e) {
 	            e.printStackTrace();
 	        }
 	    }
