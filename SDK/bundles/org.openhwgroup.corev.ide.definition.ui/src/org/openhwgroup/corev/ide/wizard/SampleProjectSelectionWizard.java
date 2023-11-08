@@ -213,7 +213,7 @@ public class SampleProjectSelectionWizard extends WizardPage {
 			selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/FreeRTOS-Kernel.zip")); //$NON-NLS-1$
 			selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/common-io.zip")); //$NON-NLS-1$
 			selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/shared.zip")); //$NON-NLS-1$
-			}else if(OSUtil.getOS()== OS.WINDOWS) {
+			}else if(OSUtil.getOS()== OS.LINUX) {
 				selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/FreeRTOS-Kernel.tar.gz")); //$NON-NLS-1$
 				selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/common-io.tar.gz")); //$NON-NLS-1$
 				selectedProjectFromTree.add(resolvePath("${eclipse_home}/../examples/shared_examples/shared.tar.gz")); //$NON-NLS-1$
